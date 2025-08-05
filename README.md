@@ -3,16 +3,15 @@
     <img src="https://assets.jamm-pay.jp/brand/jamm_logo.png" alt="logo" width="120" height="120">
   </a>
   <h3 align="center">Jamm Node SDK</h3>
-
   <p align="center">
     The official Node SDK for Jamm's payment API!
-    <br>
+    <br />
     We strongly recommend using the SDK for backend integration in order to simplify and streamline your development process!
   </p>
 </div>
 
-## Installation
+## Quickstart
 
-```sh
-npm install @jamm-pay/node-sdk
-```
+Visit our docs for more information.
+
+<https://docs.jamm-pay.jp>

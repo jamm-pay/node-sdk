@@ -3,7 +3,7 @@
   "description": "Jamm SDK",
   "author": "Jamm <support@jamm-pay.jp> (https://jamm-pay.jp)",
   "license": "MIT",
-  "version": "0.2.0",
+  "version": "0.0.0",
   "type": "module",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
