@@ -1,6 +1,13 @@
-import config from "./config";
+import config, { registerOAuth2Reset } from "./config";
 
 let tokenCache: TokenResponse | undefined;
+let pendingTokenRequest: Promise<string> | null = null;
+
+// Clear token cache when config is reset (e.g. re-init with different credentials)
+registerOAuth2Reset(() => {
+    tokenCache = undefined;
+    pendingTokenRequest = null;
+});
 
 interface TokenResponse {
   access_token: string;
@@ -24,6 +31,21 @@ async function getAccessToken(): Promise<string> {
         }
     }
 
+    // Prevent concurrent token fetches — reuse the in-flight request
+    if (pendingTokenRequest) {
+        return pendingTokenRequest;
+    }
+
+    pendingTokenRequest = fetchNewToken();
+
+    try {
+        return await pendingTokenRequest;
+    } finally {
+        pendingTokenRequest = null;
+    }
+}
+
+async function fetchNewToken(): Promise<string> {
     const conf = config.get();
 
     const basicAuth = Buffer.from(`${conf.clientId}:${conf.clientSecret}`).toString('base64');
@@ -53,6 +75,12 @@ async function getAccessToken(): Promise<string> {
     return tokenCache.access_token;
 }
 
+function reset(): void {
+    tokenCache = undefined;
+    pendingTokenRequest = null;
+}
+
 export default {
     getAccessToken,
+    reset,
 };

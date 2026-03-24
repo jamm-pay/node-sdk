@@ -13,7 +13,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file api/v1/bank.proto.
  */
 export const file_api_v1_bank: GenFile = /*@__PURE__*/
-  fileDesc("ChFhcGkvdjEvYmFuay5wcm90bxIGYXBpLnYxIjAKDkdldEJhbmtSZXF1ZXN0Eh4KCWJhbmtfY29kZRgBIAEoCUILukgIyAEBcgOYAQQiNQoPR2V0QmFua1Jlc3BvbnNlEiIKBGJhbmsYASABKAsyDC5hcGkudjEuQmFua0IGukgDyAEBIhYKFEdldE1ham9yQmFua3NSZXF1ZXN0IoUBChVHZXRNYWpvckJhbmtzUmVzcG9uc2USJAoGbWl6dWhvGAEgASgLMgwuYXBpLnYxLkJhbmtCBrpIA8gBARIiCgRtdWZnGAIgASgLMgwuYXBpLnYxLkJhbmtCBrpIA8gBARIiCgRzbWJjGAMgASgLMgwuYXBpLnYxLkJhbmtCBrpIA8gBASIxChJTZWFyY2hCYW5rc1JlcXVlc3QSGwoFcXVlcnkYASABKAlCDLpICcgBAXIEEAEYMiIyChNTZWFyY2hCYW5rc1Jlc3BvbnNlEhsKBWJhbmtzGAEgAygLMgwuYXBpLnYxLkJhbmsiVAoQR2V0QnJhbmNoUmVxdWVzdBIeCgliYW5rX2NvZGUYASABKAlCC7pICMgBAXIDmAEEEiAKC2JyYW5jaF9jb2RlGAIgASgJQgu6SAjIAQFyA5gBAyI/ChFHZXRCcmFuY2hSZXNwb25zZRIqCgZicmFuY2gYASABKAsyEi5hcGkudjEuQmFua0JyYW5jaEIGukgDyAEBIjQKEkdldEJyYW5jaGVzUmVxdWVzdBIeCgliYW5rX2NvZGUYASABKAlCC7pICMgBAXIDmAEEIjsKE0dldEJyYW5jaGVzUmVzcG9uc2USJAoIYnJhbmNoZXMYASADKAsyEi5hcGkudjEuQmFua0JyYW5jaCJUChVTZWFyY2hCcmFuY2hlc1JlcXVlc3QSHgoJYmFua19jb2RlGAEgASgJQgu6SAjIAQFyA5gBBBIbCgVxdWVyeRgCIAEoCUIMukgJyAEBcgQQARgyIj4KFlNlYXJjaEJyYW5jaGVzUmVzcG9uc2USJAoIYnJhbmNoZXMYASADKAsyEi5hcGkudjEuQmFua0JyYW5jaDLGAwoLQmFua1NlcnZpY2USPAoHR2V0QmFuaxIWLmFwaS52MS5HZXRCYW5rUmVxdWVzdBoXLmFwaS52MS5HZXRCYW5rUmVzcG9uc2UiABJOCg1HZXRNYWpvckJhbmtzEhwuYXBpLnYxLkdldE1ham9yQmFua3NSZXF1ZXN0Gh0uYXBpLnYxLkdldE1ham9yQmFua3NSZXNwb25zZSIAEkgKC1NlYXJjaEJhbmtzEhouYXBpLnYxLlNlYXJjaEJhbmtzUmVxdWVzdBobLmFwaS52MS5TZWFyY2hCYW5rc1Jlc3BvbnNlIgASQgoJR2V0QnJhbmNoEhguYXBpLnYxLkdldEJyYW5jaFJlcXVlc3QaGS5hcGkudjEuR2V0QnJhbmNoUmVzcG9uc2UiABJICgtHZXRCcmFuY2hlcxIaLmFwaS52MS5HZXRCcmFuY2hlc1JlcXVlc3QaGy5hcGkudjEuR2V0QnJhbmNoZXNSZXNwb25zZSIAElEKDlNlYXJjaEJyYW5jaGVzEh0uYXBpLnYxLlNlYXJjaEJyYW5jaGVzUmVxdWVzdBoeLmFwaS52MS5TZWFyY2hCcmFuY2hlc1Jlc3BvbnNlIgBCbQoKY29tLmFwaS52MUIJQmFua1Byb3RvUAFaG2FwaS9wcm90by9nZW4vYXBpL3YxO2FwaV92MaICA0FYWKoCBkFwaS5WMcoCBkFwaVxWMeICEkFwaVxWMVxHUEJNZXRhZGF0YeoCB0FwaTo6VjFiBnByb3RvMw", [file_api_v1_common, file_buf_validate_validate]);
+  fileDesc("ChFhcGkvdjEvYmFuay5wcm90bxIGYXBpLnYxIjAKDkdldEJhbmtSZXF1ZXN0Eh4KCWJhbmtfY29kZRgBIAEoCUILukgIyAEBcgOYAQQiNQoPR2V0QmFua1Jlc3BvbnNlEiIKBGJhbmsYASABKAsyDC5hcGkudjEuQmFua0IGukgDyAEBIjEKElNlYXJjaEJhbmtzUmVxdWVzdBIbCgVxdWVyeRgBIAEoCUIMukgJyAEBcgQQARgyIjIKE1NlYXJjaEJhbmtzUmVzcG9uc2USGwoFYmFua3MYASADKAsyDC5hcGkudjEuQmFuayJUChBHZXRCcmFuY2hSZXF1ZXN0Eh4KCWJhbmtfY29kZRgBIAEoCUILukgIyAEBcgOYAQQSIAoLYnJhbmNoX2NvZGUYAiABKAlCC7pICMgBAXIDmAEDIj8KEUdldEJyYW5jaFJlc3BvbnNlEioKBmJyYW5jaBgBIAEoCzISLmFwaS52MS5CYW5rQnJhbmNoQga6SAPIAQEiNAoSR2V0QnJhbmNoZXNSZXF1ZXN0Eh4KCWJhbmtfY29kZRgBIAEoCUILukgIyAEBcgOYAQQiOwoTR2V0QnJhbmNoZXNSZXNwb25zZRIkCghicmFuY2hlcxgBIAMoCzISLmFwaS52MS5CYW5rQnJhbmNoIlQKFVNlYXJjaEJyYW5jaGVzUmVxdWVzdBIeCgliYW5rX2NvZGUYASABKAlCC7pICMgBAXIDmAEEEhsKBXF1ZXJ5GAIgASgJQgy6SAnIAQFyBBABGDIiPgoWU2VhcmNoQnJhbmNoZXNSZXNwb25zZRIkCghicmFuY2hlcxgBIAMoCzISLmFwaS52MS5CYW5rQnJhbmNoMvYCCgtCYW5rU2VydmljZRI8CgdHZXRCYW5rEhYuYXBpLnYxLkdldEJhbmtSZXF1ZXN0GhcuYXBpLnYxLkdldEJhbmtSZXNwb25zZSIAEkgKC1NlYXJjaEJhbmtzEhouYXBpLnYxLlNlYXJjaEJhbmtzUmVxdWVzdBobLmFwaS52MS5TZWFyY2hCYW5rc1Jlc3BvbnNlIgASQgoJR2V0QnJhbmNoEhguYXBpLnYxLkdldEJyYW5jaFJlcXVlc3QaGS5hcGkudjEuR2V0QnJhbmNoUmVzcG9uc2UiABJICgtHZXRCcmFuY2hlcxIaLmFwaS52MS5HZXRCcmFuY2hlc1JlcXVlc3QaGy5hcGkudjEuR2V0QnJhbmNoZXNSZXNwb25zZSIAElEKDlNlYXJjaEJyYW5jaGVzEh0uYXBpLnYxLlNlYXJjaEJyYW5jaGVzUmVxdWVzdBoeLmFwaS52MS5TZWFyY2hCcmFuY2hlc1Jlc3BvbnNlIgBCbQoKY29tLmFwaS52MUIJQmFua1Byb3RvUAFaG2FwaS9wcm90by9nZW4vYXBpL3YxO2FwaV92MaICA0FYWKoCBkFwaS5WMcoCBkFwaVxWMeICEkFwaVxWMVxHUEJNZXRhZGF0YeoCB0FwaTo6VjFiBnByb3RvMw", [file_api_v1_common, file_buf_validate_validate]);
 
 /**
  * @generated from message api.v1.GetBankRequest
@@ -70,72 +70,6 @@ export const GetBankResponseSchema: GenMessage<GetBankResponse, GetBankResponseJ
   messageDesc(file_api_v1_bank, 1);
 
 /**
- * @generated from message api.v1.GetMajorBanksRequest
- */
-export type GetMajorBanksRequest = Message<"api.v1.GetMajorBanksRequest"> & {
-};
-
-/**
- * @generated from message api.v1.GetMajorBanksRequest
- */
-export type GetMajorBanksRequestJson = {
-};
-
-/**
- * Describes the message api.v1.GetMajorBanksRequest.
- * Use `create(GetMajorBanksRequestSchema)` to create a new message.
- */
-export const GetMajorBanksRequestSchema: GenMessage<GetMajorBanksRequest, GetMajorBanksRequestJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 2);
-
-/**
- * @generated from message api.v1.GetMajorBanksResponse
- */
-export type GetMajorBanksResponse = Message<"api.v1.GetMajorBanksResponse"> & {
-  /**
-   * @generated from field: api.v1.Bank mizuho = 1;
-   */
-  mizuho?: Bank;
-
-  /**
-   * @generated from field: api.v1.Bank mufg = 2;
-   */
-  mufg?: Bank;
-
-  /**
-   * @generated from field: api.v1.Bank smbc = 3;
-   */
-  smbc?: Bank;
-};
-
-/**
- * @generated from message api.v1.GetMajorBanksResponse
- */
-export type GetMajorBanksResponseJson = {
-  /**
-   * @generated from field: api.v1.Bank mizuho = 1;
-   */
-  mizuho?: BankJson;
-
-  /**
-   * @generated from field: api.v1.Bank mufg = 2;
-   */
-  mufg?: BankJson;
-
-  /**
-   * @generated from field: api.v1.Bank smbc = 3;
-   */
-  smbc?: BankJson;
-};
-
-/**
- * Describes the message api.v1.GetMajorBanksResponse.
- * Use `create(GetMajorBanksResponseSchema)` to create a new message.
- */
-export const GetMajorBanksResponseSchema: GenMessage<GetMajorBanksResponse, GetMajorBanksResponseJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 3);
-
-/**
  * @generated from message api.v1.SearchBanksRequest
  */
 export type SearchBanksRequest = Message<"api.v1.SearchBanksRequest"> & {
@@ -164,7 +98,7 @@ export type SearchBanksRequestJson = {
  * Use `create(SearchBanksRequestSchema)` to create a new message.
  */
 export const SearchBanksRequestSchema: GenMessage<SearchBanksRequest, SearchBanksRequestJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 4);
+  messageDesc(file_api_v1_bank, 2);
 
 /**
  * @generated from message api.v1.SearchBanksResponse
@@ -191,7 +125,7 @@ export type SearchBanksResponseJson = {
  * Use `create(SearchBanksResponseSchema)` to create a new message.
  */
 export const SearchBanksResponseSchema: GenMessage<SearchBanksResponse, SearchBanksResponseJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 5);
+  messageDesc(file_api_v1_bank, 3);
 
 /**
  * @generated from message api.v1.GetBranchRequest
@@ -228,7 +162,7 @@ export type GetBranchRequestJson = {
  * Use `create(GetBranchRequestSchema)` to create a new message.
  */
 export const GetBranchRequestSchema: GenMessage<GetBranchRequest, GetBranchRequestJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 6);
+  messageDesc(file_api_v1_bank, 4);
 
 /**
  * @generated from message api.v1.GetBranchResponse
@@ -255,7 +189,7 @@ export type GetBranchResponseJson = {
  * Use `create(GetBranchResponseSchema)` to create a new message.
  */
 export const GetBranchResponseSchema: GenMessage<GetBranchResponse, GetBranchResponseJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 7);
+  messageDesc(file_api_v1_bank, 5);
 
 /**
  * @generated from message api.v1.GetBranchesRequest
@@ -282,7 +216,7 @@ export type GetBranchesRequestJson = {
  * Use `create(GetBranchesRequestSchema)` to create a new message.
  */
 export const GetBranchesRequestSchema: GenMessage<GetBranchesRequest, GetBranchesRequestJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 8);
+  messageDesc(file_api_v1_bank, 6);
 
 /**
  * @generated from message api.v1.GetBranchesResponse
@@ -309,7 +243,7 @@ export type GetBranchesResponseJson = {
  * Use `create(GetBranchesResponseSchema)` to create a new message.
  */
 export const GetBranchesResponseSchema: GenMessage<GetBranchesResponse, GetBranchesResponseJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 9);
+  messageDesc(file_api_v1_bank, 7);
 
 /**
  * @generated from message api.v1.SearchBranchesRequest
@@ -346,7 +280,7 @@ export type SearchBranchesRequestJson = {
  * Use `create(SearchBranchesRequestSchema)` to create a new message.
  */
 export const SearchBranchesRequestSchema: GenMessage<SearchBranchesRequest, SearchBranchesRequestJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 10);
+  messageDesc(file_api_v1_bank, 8);
 
 /**
  * @generated from message api.v1.SearchBranchesResponse
@@ -373,7 +307,7 @@ export type SearchBranchesResponseJson = {
  * Use `create(SearchBranchesResponseSchema)` to create a new message.
  */
 export const SearchBranchesResponseSchema: GenMessage<SearchBranchesResponse, SearchBranchesResponseJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_bank, 11);
+  messageDesc(file_api_v1_bank, 9);
 
 /**
  * @generated from service api.v1.BankService
@@ -388,16 +322,6 @@ export const BankService: GenService<{
     methodKind: "unary";
     input: typeof GetBankRequestSchema;
     output: typeof GetBankResponseSchema;
-  },
-  /**
-   * GetMajorBanks returns a list of major banks to render Mizuho, SMBC, and MUFG in Core UI.
-   *
-   * @generated from rpc api.v1.BankService.GetMajorBanks
-   */
-  getMajorBanks: {
-    methodKind: "unary";
-    input: typeof GetMajorBanksRequestSchema;
-    output: typeof GetMajorBanksResponseSchema;
   },
   /**
    * SearchBanks returns a list of banks that match the query.

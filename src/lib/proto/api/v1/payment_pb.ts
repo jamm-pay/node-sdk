@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv1";
 import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv1";
-import type { Buyer, BuyerJson, Contract, ContractJson, Customer, CustomerJson, Pagination, PaginationJson } from "./common_pb";
+import type { AsyncStatus, AsyncStatusJson, Buyer, BuyerJson, ChargeStatus, ChargeStatusJson, Contract, ContractJson, Customer, CustomerJson, Pagination, PaginationJson } from "./common_pb";
 import { file_api_v1_common } from "./common_pb";
 import { file_buf_validate_validate } from "../../buf/validate/validate_pb";
 import { file_google_api_annotations } from "../../google/api/annotations_pb";
@@ -17,7 +17,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file api/v1/payment.proto.
  */
 export const file_api_v1_payment: GenFile = /*@__PURE__*/
-  fileDesc("ChRhcGkvdjEvcGF5bWVudC5wcm90bxIGYXBpLnYxIm8KGE9mZlNlc3Npb25QYXltZW50UmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEi0KBmNoYXJnZRgCIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlQga6SAPIAQEidQoZT2ZmU2Vzc2lvblBheW1lbnRSZXNwb25zZRIqCghjdXN0b21lchgBIAEoCzIQLmFwaS52MS5DdXN0b21lckIGukgDyAEBEiwKBmNoYXJnZRgCIAEoCzIULmFwaS52MS5DaGFyZ2VSZXN1bHRCBrpIA8gBASKYAQoQQWRkQ2hhcmdlUmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEi0KBmNoYXJnZRgCIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlQga6SAPIAQESIgoIcmVkaXJlY3QYCiABKAsyCy5hcGkudjEuVVJMSACIAQFCCwoJX3JlZGlyZWN0IpoBChFBZGRDaGFyZ2VSZXNwb25zZRImCgZjaGFyZ2UYASABKAsyDi5hcGkudjEuQ2hhcmdlQga6SAPIAQESKgoIY3VzdG9tZXIYAiABKAsyEC5hcGkudjEuQ3VzdG9tZXJCBrpIA8gBARIxCgxwYXltZW50X2xpbmsYAyABKAsyEy5hcGkudjEuUGF5bWVudExpbmtCBrpIA8gBASJ1ChFHZXRDaGFyZ2VzUmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEisKCnBhZ2luYXRpb24YAiABKAsyEi5hcGkudjEuUGFnaW5hdGlvbkgAiAEBQg0KC19wYWdpbmF0aW9uIpcBChJHZXRDaGFyZ2VzUmVzcG9uc2USJQoHY2hhcmdlcxgBIAMoCzIULmFwaS52MS5DaGFyZ2VSZXN1bHQSKgoIY3VzdG9tZXIYAiABKAsyEC5hcGkudjEuQ3VzdG9tZXJCBrpIA8gBARIuCgpwYWdpbmF0aW9uGAMgASgLMhIuYXBpLnYxLlBhZ2luYXRpb25CBrpIA8gBASIqChBHZXRDaGFyZ2VSZXF1ZXN0EhYKBmNoYXJnZRgCIAEoCUIGukgDyAEBIm0KEUdldENoYXJnZVJlc3BvbnNlEiwKBmNoYXJnZRgBIAEoCzIULmFwaS52MS5DaGFyZ2VSZXN1bHRCBrpIA8gBARIqCghjdXN0b21lchgCIAEoCzIQLmFwaS52MS5DdXN0b21lckIGukgDyAEBImYKD1dpdGhkcmF3UmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEi0KBmNoYXJnZRgCIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlQga6SAPIAQEibAoQV2l0aGRyYXdSZXNwb25zZRIqCghjdXN0b21lchgBIAEoCzIQLmFwaS52MS5DdXN0b21lckIGukgDyAEBEiwKBmNoYXJnZRgCIAEoCzIULmFwaS52MS5DaGFyZ2VSZXN1bHRCBrpIA8gBASJ7CiJDcmVhdGVDb250cmFjdFdpdGhvdXRDaGFyZ2VSZXF1ZXN0EiQKBWJ1eWVyGAEgASgLMg0uYXBpLnYxLkJ1eWVyQga6SAPIAQESIgoIcmVkaXJlY3QYCiABKAsyCy5hcGkudjEuVVJMSACIAQFCCwoJX3JlZGlyZWN0IrABCiNDcmVhdGVDb250cmFjdFdpdGhvdXRDaGFyZ2VSZXNwb25zZRIqCghjb250cmFjdBgBIAEoCzIQLmFwaS52MS5Db250cmFjdEIGukgDyAEBEioKCGN1c3RvbWVyGAIgASgLMhAuYXBpLnYxLkN1c3RvbWVyQga6SAPIAQESMQoMcGF5bWVudF9saW5rGAMgASgLMhMuYXBpLnYxLlBheW1lbnRMaW5rQga6SAPIAQEipwEKH0NyZWF0ZUNvbnRyYWN0V2l0aENoYXJnZVJlcXVlc3QSJAoFYnV5ZXIYASABKAsyDS5hcGkudjEuQnV5ZXJCBrpIA8gBARItCgZjaGFyZ2UYAiABKAsyFS5hcGkudjEuSW5pdGlhbENoYXJnZUIGukgDyAEBEiIKCHJlZGlyZWN0GAogASgLMgsuYXBpLnYxLlVSTEgAiAEBQgsKCV9yZWRpcmVjdCLVAQogQ3JlYXRlQ29udHJhY3RXaXRoQ2hhcmdlUmVzcG9uc2USKgoIY29udHJhY3QYASABKAsyEC5hcGkudjEuQ29udHJhY3RCBrpIA8gBARImCgZjaGFyZ2UYAiABKAsyDi5hcGkudjEuQ2hhcmdlQga6SAPIAQESKgoIY3VzdG9tZXIYAyABKAsyEC5hcGkudjEuQ3VzdG9tZXJCBrpIA8gBARIxCgxwYXltZW50X2xpbmsYBCABKAsyEy5hcGkudjEuUGF5bWVudExpbmtCBrpIA8gBASLdAQoDVVJMEloKC3N1Y2Nlc3NfdXJsGAEgASgJQkC6SD26AToKCXZhbGlkX3VyaRIfc3VjY2Vzc191cmwgbXVzdCBiZSBhIHZhbGlkIFVSSRoMdGhpcy5pc1VyaSgpSACIAQESWgoLZmFpbHVyZV91cmwYAiABKAlCQLpIPboBOgoJdmFsaWRfdXJpEh9mYWlsdXJlX3VybCBtdXN0IGJlIGEgdmFsaWQgVVJJGgx0aGlzLmlzVXJpKClIAYgBAUIOCgxfc3VjY2Vzc191cmxCDgoMX2ZhaWx1cmVfdXJsIoUCCg1Jbml0aWFsQ2hhcmdlEhoKBXByaWNlGAIgASgFQgu6SAgaBhigwh4gARIbCgtkZXNjcmlwdGlvbhgDIAEoCUIGukgDyAEBEjUKCG1ldGFkYXRhGAQgAygLMiMuYXBpLnYxLkluaXRpYWxDaGFyZ2UuTWV0YWRhdGFFbnRyeRJECgpleHBpcmVzX2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIPukgMsgEJSgUIgJqeAUAASACIAQEaLwoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQg0KC19leHBpcmVzX2F0IpcCCgZDaGFyZ2USHgoCaWQYASABKAlCErpID8gBAXIKMghedHJ4LS4qJBIaCgVwcmljZRgCIAEoBUILukgIGgYYoMIeIAESGwoLZGVzY3JpcHRpb24YAyABKAlCBrpIA8gBARIuCghtZXRhZGF0YRgEIAMoCzIcLmFwaS52MS5DaGFyZ2UuTWV0YWRhdGFFbnRyeRJECgpleHBpcmVzX2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIPukgMsgEJSgUIgJqeAUAASACIAQEaLwoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQg0KC19leHBpcmVzX2F0IvQECgxDaGFyZ2VSZXN1bHQSJQoJY2hhcmdlX2lkGAEgASgJQhK6SA/IAQFyCjIIXnRyeC0uKiQSDAoEcGFpZBgCIAEoCBIWCgZyZWFzb24YAyABKAlCBrpIA8gBARIbCgtkZXNjcmlwdGlvbhgEIAEoCUIGukgDyAEBEh0KDW1lcmNoYW50X25hbWUYBSABKAlCBrpIA8gBARIeCg5pbml0aWFsX2Ftb3VudBgGIAEoBUIGukgDyAEBEhgKCGRpc2NvdW50GAcgASgFQga6SAPIAQESHAoMZmluYWxfYW1vdW50GAggASgFQga6SAPIAQESHAoPYW1vdW50X3JlZnVuZGVkGAkgASgFSACIAQESGAoIY3VycmVuY3kYCiABKAlCBrpIA8gBARIYCgh0b2tlbl9pZBgLIAEoCUIGukgDyAEBEjQKCG1ldGFkYXRhGAwgAygLMiIuYXBpLnYxLkNoYXJnZVJlc3VsdC5NZXRhZGF0YUVudHJ5EjYKCmNyZWF0ZWRfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQga6SAPIAQESNgoKdXBkYXRlZF9hdBgOIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBARI1Cgxwcm9jZXNzZWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAGIAQEaLwoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQhIKEF9hbW91bnRfcmVmdW5kZWRCDwoNX3Byb2Nlc3NlZF9hdCLHAQoLUGF5bWVudExpbmsSSAoDdXJsGAEgASgJQju6SDi6ATIKCXZhbGlkX3VyaRIXdXJsIG11c3QgYmUgYSB2YWxpZCBVUkkaDHRoaXMuaXNVcmkoKcgBARI2CgpjcmVhdGVkX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIGukgDyAEBEjYKCmV4cGlyZXNfYXQYCyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQga6SAPIAQEi4wEKF09uU2Vzc2lvblBheW1lbnRSZXF1ZXN0EiYKCGN1c3RvbWVyGAEgASgJQg+6SAxyCjIIXmN1cy0uKyRIAIgBARIhCgVidXllchgCIAEoCzINLmFwaS52MS5CdXllckgBiAEBEioKBmNoYXJnZRgDIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlSAKIAQESIgoIcmVkaXJlY3QYCiABKAsyCy5hcGkudjEuVVJMSAOIAQFCCwoJX2N1c3RvbWVyQggKBl9idXllckIJCgdfY2hhcmdlQgsKCV9yZWRpcmVjdCJpChVPblNlc3Npb25QYXltZW50RXJyb3ISNwoEY29kZRgBIAEoDjIhLmFwaS52MS5PblNlc3Npb25QYXltZW50RXJyb3JDb2RlQga6SAPIAQESFwoHbWVzc2FnZRgCIAEoCUIGukgDyAEBItsBChRPblNlc3Npb25QYXltZW50RGF0YRInCghjb250cmFjdBgBIAEoCzIQLmFwaS52MS5Db250cmFjdEgAiAEBEiMKBmNoYXJnZRgCIAEoCzIOLmFwaS52MS5DaGFyZ2VIAYgBARIqCghjdXN0b21lchgDIAEoCzIQLmFwaS52MS5DdXN0b21lckIGukgDyAEBEjEKDHBheW1lbnRfbGluaxgEIAEoCzITLmFwaS52MS5QYXltZW50TGlua0IGukgDyAEBQgsKCV9jb250cmFjdEIJCgdfY2hhcmdlIqIBChhPblNlc3Npb25QYXltZW50UmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIxCgVlcnJvchgCIAEoCzIdLmFwaS52MS5PblNlc3Npb25QYXltZW50RXJyb3JIAIgBARIvCgRkYXRhGAMgASgLMhwuYXBpLnYxLk9uU2Vzc2lvblBheW1lbnREYXRhSAGIAQFCCAoGX2Vycm9yQgcKBV9kYXRhKtEEChlPblNlc3Npb25QYXltZW50RXJyb3JDb2RlEi0KKU9OX1NFU1NJT05fUEFZTUVOVF9FUlJPUl9DT0RFX1VOU1BFQ0lGSUVEEAASNwozT05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfTUlTU0lOR19SRURJUkVDVF9VUkxTEAESPQo5T05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfTUlTU0lOR19SRVFVSVJFRF9QQVJBTUVURVJTEAISMAosT05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfTUlTU0lOR19DSEFSR0UQChI0CjBPTl9TRVNTSU9OX1BBWU1FTlRfRVJST1JfQ09ERV9DVVNUT01FUl9OT1RfRk9VTkQQCxIzCi9PTl9TRVNTSU9OX1BBWU1FTlRfRVJST1JfQ09ERV9DVVNUT01FUl9JTkFDVElWRRAMEkIKPk9OX1NFU1NJT05fUEFZTUVOVF9FUlJPUl9DT0RFX01FUkNIQU5UX0NVU1RPTUVSX0FMUkVBRFlfRVhJU1RTEBQSMwovT05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfVkFMSURBVElPTl9GQUlMRUQQHhI7CjdPTl9TRVNTSU9OX1BBWU1FTlRfRVJST1JfQ09ERV9TVFJBVEVHWV9FWEVDVVRJT05fRkFJTEVEECgSOgo2T05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfSU5WQUxJRF9QQVlNRU5UX1NUUkFURUdZECky4A8KDlBheW1lbnRTZXJ2aWNlEr0CChtDcmVhdGVDb250cmFjdFdpdGhvdXRDaGFyZ2USKi5hcGkudjEuQ3JlYXRlQ29udHJhY3RXaXRob3V0Q2hhcmdlUmVxdWVzdBorLmFwaS52MS5DcmVhdGVDb250cmFjdFdpdGhvdXRDaGFyZ2VSZXNwb25zZSLEAZJBmgEKB3BheW1lbnQSOENyZWF0ZSBhIGNvbnRyYWN0IHdpdGhvdXQgaW5pdGlhbCBjaGFyZ2UgKGNvbnRyYWN0IG9ubHkpGjhDcmVhdGUgYSBjb250cmFjdCB3aXRob3V0IGluaXRpYWwgY2hhcmdlIChjb250cmFjdCBvbmx5KSobY3JlYXRlQ29udHJhY3RXaXRob3V0Q2hhcmdlgtPkkwIgOgEqIhsvdjEvY29udHJhY3Qtd2l0aG91dC1jaGFyZ2UShwIKGENyZWF0ZUNvbnRyYWN0V2l0aENoYXJnZRInLmFwaS52MS5DcmVhdGVDb250cmFjdFdpdGhDaGFyZ2VSZXF1ZXN0GiguYXBpLnYxLkNyZWF0ZUNvbnRyYWN0V2l0aENoYXJnZVJlc3BvbnNlIpcBkkFxCgdwYXltZW50EiVDcmVhdGUgYSBjb250cmFjdCB3aXRoIGluaXRpYWwgY2hhcmdlGiVDcmVhdGUgYSBjb250cmFjdCB3aXRoIGluaXRpYWwgY2hhcmdlKhhjcmVhdGVDb250cmFjdFdpdGhDaGFyZ2WC0+STAh06ASoiGC92MS9jb250cmFjdC13aXRoLWNoYXJnZRK4AQoJQWRkQ2hhcmdlEhguYXBpLnYxLkFkZENoYXJnZVJlcXVlc3QaGS5hcGkudjEuQWRkQ2hhcmdlUmVzcG9uc2UidpJBWgoHcGF5bWVudBIhVXNlIGV4aXN0aW5nIGNvbnRyYWN0IHdpdGggY2hhcmdlGiFVc2UgZXhpc3RpbmcgY29udHJhY3Qgd2l0aCBjaGFyZ2UqCWFkZENoYXJnZYLT5JMCEzoBKiIOL3YxL2FkZC1jaGFyZ2USrgEKCUdldENoYXJnZRIYLmFwaS52MS5HZXRDaGFyZ2VSZXF1ZXN0GhkuYXBpLnYxLkdldENoYXJnZVJlc3BvbnNlImySQU4KB3BheW1lbnQSFUdldCBhIHNwZWNpZmljIGNoYXJnZRohR2V0IGEgc3BlY2lmaWMgY2hhcmdlIGluZm9ybWF0aW9uKglnZXRDaGFyZ2WC0+STAhUSEy92MS9jaGFyZ2Uve2NoYXJnZX0SuAEKCkdldENoYXJnZXMSGS5hcGkudjEuR2V0Q2hhcmdlc1JlcXVlc3QaGi5hcGkudjEuR2V0Q2hhcmdlc1Jlc3BvbnNlInOSQVIKB3BheW1lbnQSFUdldCBhIGxpc3Qgb2YgY2hhcmdlcxokR2V0IGEgbGlzdCBvZiBjaGFyZ2VzIGZvciBhIGN1c3RvbWVyKgpnZXRDaGFyZ2VzgtPkkwIYEhYvdjEvY2hhcmdlcy97Y3VzdG9tZXJ9Eu4BCghXaXRoZHJhdxIXLmFwaS52MS5XaXRoZHJhd1JlcXVlc3QaGC5hcGkudjEuV2l0aGRyYXdSZXNwb25zZSKuAZJBkwEKB3BheW1lbnQSOldpdGhkcmF3IG1vbmV5IGZyb20gY3VzdG9tZXIgaW1tZWRpYXRlbHksIHdpdGhvdXQgcmVkaXJlY3QaQlRoaXMgY2FsbCBpcyBzeW5jaHJvbm91cy4gVGhlIG1vbmV5IHdpbGwgYmUgd2l0aGRyYXduIGltbWVkaWF0ZWx5LioId2l0aGRyYXeC0+STAhE6ASoiDC92MS93aXRoZHJhdxKnAgoRT2ZmU2Vzc2lvblBheW1lbnQSIC5hcGkudjEuT2ZmU2Vzc2lvblBheW1lbnRSZXF1ZXN0GiEuYXBpLnYxLk9mZlNlc3Npb25QYXltZW50UmVzcG9uc2UizAGSQaUBCgdwYXltZW50EilQcm9jZXNzIHBheW1lbnQgZGlyZWN0bHkgd2l0aG91dCByZWRpcmVjdBpcRXhlY3V0ZSBhIHBheW1lbnQgb2ZmLXNlc3Npb24gd2l0aGluIHlvdXIgYXBwbGljYXRpb24gd2l0aG91dCByZWRpcmVjdGluZyB0byBhIHBheW1lbnQgcGFnZS4qEW9mZlNlc3Npb25QYXltZW50gtPkkwIdOgEqIhgvdjEvcGF5bWVudHMvb2ZmLXNlc3Npb24SwQIKEE9uU2Vzc2lvblBheW1lbnQSHy5hcGkudjEuT25TZXNzaW9uUGF5bWVudFJlcXVlc3QaIC5hcGkudjEuT25TZXNzaW9uUGF5bWVudFJlc3BvbnNlIukBkkHDAQoHcGF5bWVudBImUHJvY2VzcyBwYXltZW50IHdpdGggb3B0aW9uYWwgcmVkaXJlY3QaflVuaWZpZWQgaW50ZXJmYWNlIGZvciBjcmVhdGluZyBwYXltZW50cyAtIHN1cHBvcnRzIGV4aXN0aW5nIGN1c3RvbWVycywgbmV3IGN1c3RvbWVycyB3aXRoIGNoYXJnZXMsIGFuZCBjb250cmFjdC1vbmx5IGNyZWF0aW9uLioQb25TZXNzaW9uUGF5bWVudILT5JMCHDoBKiIXL3YxL3BheW1lbnRzL29uLXNlc3Npb25CcAoKY29tLmFwaS52MUIMUGF5bWVudFByb3RvUAFaG2FwaS9wcm90by9nZW4vYXBpL3YxO2FwaV92MaICA0FYWKoCBkFwaS5WMcoCBkFwaVxWMeICEkFwaVxWMVxHUEJNZXRhZGF0YeoCB0FwaTo6VjFiBnByb3RvMw", [file_api_v1_common, file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_protoc_gen_openapiv2_options_annotations]);
+  fileDesc("ChRhcGkvdjEvcGF5bWVudC5wcm90bxIGYXBpLnYxIm8KGE9mZlNlc3Npb25QYXltZW50UmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEi0KBmNoYXJnZRgCIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlQga6SAPIAQEidQoZT2ZmU2Vzc2lvblBheW1lbnRSZXNwb25zZRIqCghjdXN0b21lchgBIAEoCzIQLmFwaS52MS5DdXN0b21lckIGukgDyAEBEiwKBmNoYXJnZRgCIAEoCzIULmFwaS52MS5DaGFyZ2VSZXN1bHRCBrpIA8gBASKYAQoQQWRkQ2hhcmdlUmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEi0KBmNoYXJnZRgCIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlQga6SAPIAQESIgoIcmVkaXJlY3QYCiABKAsyCy5hcGkudjEuVVJMSACIAQFCCwoJX3JlZGlyZWN0IpoBChFBZGRDaGFyZ2VSZXNwb25zZRImCgZjaGFyZ2UYASABKAsyDi5hcGkudjEuQ2hhcmdlQga6SAPIAQESKgoIY3VzdG9tZXIYAiABKAsyEC5hcGkudjEuQ3VzdG9tZXJCBrpIA8gBARIxCgxwYXltZW50X2xpbmsYAyABKAsyEy5hcGkudjEuUGF5bWVudExpbmtCBrpIA8gBASJ1ChFHZXRDaGFyZ2VzUmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEisKCnBhZ2luYXRpb24YAiABKAsyEi5hcGkudjEuUGFnaW5hdGlvbkgAiAEBQg0KC19wYWdpbmF0aW9uIpcBChJHZXRDaGFyZ2VzUmVzcG9uc2USJQoHY2hhcmdlcxgBIAMoCzIULmFwaS52MS5DaGFyZ2VSZXN1bHQSKgoIY3VzdG9tZXIYAiABKAsyEC5hcGkudjEuQ3VzdG9tZXJCBrpIA8gBARIuCgpwYWdpbmF0aW9uGAMgASgLMhIuYXBpLnYxLlBhZ2luYXRpb25CBrpIA8gBASIqChBHZXRDaGFyZ2VSZXF1ZXN0EhYKBmNoYXJnZRgCIAEoCUIGukgDyAEBIm0KEUdldENoYXJnZVJlc3BvbnNlEiwKBmNoYXJnZRgBIAEoCzIULmFwaS52MS5DaGFyZ2VSZXN1bHRCBrpIA8gBARIqCghjdXN0b21lchgCIAEoCzIQLmFwaS52MS5DdXN0b21lckIGukgDyAEBImYKD1dpdGhkcmF3UmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEi0KBmNoYXJnZRgCIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlQga6SAPIAQEibAoQV2l0aGRyYXdSZXNwb25zZRIqCghjdXN0b21lchgBIAEoCzIQLmFwaS52MS5DdXN0b21lckIGukgDyAEBEiwKBmNoYXJnZRgCIAEoCzIULmFwaS52MS5DaGFyZ2VSZXN1bHRCBrpIA8gBASJrChRXaXRoZHJhd0FzeW5jUmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEi0KBmNoYXJnZRgCIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlQga6SAPIAQEiewoVV2l0aGRyYXdBc3luY1Jlc3BvbnNlEhoKCnJlcXVlc3RfaWQYASABKAlCBrpIA8gBARIrCgZzdGF0dXMYAiABKA4yEy5hcGkudjEuQXN5bmNTdGF0dXNCBrpIA8gBARIZCgljaGFyZ2VfaWQYAyABKAlCBrpIA8gBASJ0Ch1PZmZTZXNzaW9uUGF5bWVudEFzeW5jUmVxdWVzdBIkCghjdXN0b21lchgBIAEoCUISukgPyAEBcgoyCF5jdXMtLiskEi0KBmNoYXJnZRgCIAEoCzIVLmFwaS52MS5Jbml0aWFsQ2hhcmdlQga6SAPIAQEihAEKHk9mZlNlc3Npb25QYXltZW50QXN5bmNSZXNwb25zZRIaCgpyZXF1ZXN0X2lkGAEgASgJQga6SAPIAQESKwoGc3RhdHVzGAIgASgOMhMuYXBpLnYxLkFzeW5jU3RhdHVzQga6SAPIAQESGQoJY2hhcmdlX2lkGAMgASgJQga6SAPIAQEiOAoaV2l0aGRyYXdBc3luY1N0YXR1c1JlcXVlc3QSGgoKcmVxdWVzdF9pZBgBIAEoCUIGukgDyAEBIqwBChtXaXRoZHJhd0FzeW5jU3RhdHVzUmVzcG9uc2USKwoGc3RhdHVzGAEgASgOMhMuYXBpLnYxLkFzeW5jU3RhdHVzQga6SAPIAQESKgoIY3VzdG9tZXIYAiABKAsyEC5hcGkudjEuQ3VzdG9tZXJCBrpIA8gBARIpCgZjaGFyZ2UYAyABKAsyFC5hcGkudjEuQ2hhcmdlUmVzdWx0SACIAQFCCQoHX2NoYXJnZSJ7CiJDcmVhdGVDb250cmFjdFdpdGhvdXRDaGFyZ2VSZXF1ZXN0EiQKBWJ1eWVyGAEgASgLMg0uYXBpLnYxLkJ1eWVyQga6SAPIAQESIgoIcmVkaXJlY3QYCiABKAsyCy5hcGkudjEuVVJMSACIAQFCCwoJX3JlZGlyZWN0IrABCiNDcmVhdGVDb250cmFjdFdpdGhvdXRDaGFyZ2VSZXNwb25zZRIqCghjb250cmFjdBgBIAEoCzIQLmFwaS52MS5Db250cmFjdEIGukgDyAEBEioKCGN1c3RvbWVyGAIgASgLMhAuYXBpLnYxLkN1c3RvbWVyQga6SAPIAQESMQoMcGF5bWVudF9saW5rGAMgASgLMhMuYXBpLnYxLlBheW1lbnRMaW5rQga6SAPIAQEipwEKH0NyZWF0ZUNvbnRyYWN0V2l0aENoYXJnZVJlcXVlc3QSJAoFYnV5ZXIYASABKAsyDS5hcGkudjEuQnV5ZXJCBrpIA8gBARItCgZjaGFyZ2UYAiABKAsyFS5hcGkudjEuSW5pdGlhbENoYXJnZUIGukgDyAEBEiIKCHJlZGlyZWN0GAogASgLMgsuYXBpLnYxLlVSTEgAiAEBQgsKCV9yZWRpcmVjdCLVAQogQ3JlYXRlQ29udHJhY3RXaXRoQ2hhcmdlUmVzcG9uc2USKgoIY29udHJhY3QYASABKAsyEC5hcGkudjEuQ29udHJhY3RCBrpIA8gBARImCgZjaGFyZ2UYAiABKAsyDi5hcGkudjEuQ2hhcmdlQga6SAPIAQESKgoIY3VzdG9tZXIYAyABKAsyEC5hcGkudjEuQ3VzdG9tZXJCBrpIA8gBARIxCgxwYXltZW50X2xpbmsYBCABKAsyEy5hcGkudjEuUGF5bWVudExpbmtCBrpIA8gBASLdAQoDVVJMEloKC3N1Y2Nlc3NfdXJsGAEgASgJQkC6SD26AToKCXZhbGlkX3VyaRIfc3VjY2Vzc191cmwgbXVzdCBiZSBhIHZhbGlkIFVSSRoMdGhpcy5pc1VyaSgpSACIAQESWgoLZmFpbHVyZV91cmwYAiABKAlCQLpIPboBOgoJdmFsaWRfdXJpEh9mYWlsdXJlX3VybCBtdXN0IGJlIGEgdmFsaWQgVVJJGgx0aGlzLmlzVXJpKClIAYgBAUIOCgxfc3VjY2Vzc191cmxCDgoMX2ZhaWx1cmVfdXJsIoUCCg1Jbml0aWFsQ2hhcmdlEhoKBXByaWNlGAIgASgFQgu6SAgaBhigwh4gARIbCgtkZXNjcmlwdGlvbhgDIAEoCUIGukgDyAEBEjUKCG1ldGFkYXRhGAQgAygLMiMuYXBpLnYxLkluaXRpYWxDaGFyZ2UuTWV0YWRhdGFFbnRyeRJECgpleHBpcmVzX2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIPukgMsgEJSgUIgJqeAUAASACIAQEaLwoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQg0KC19leHBpcmVzX2F0IpcCCgZDaGFyZ2USHgoCaWQYASABKAlCErpID8gBAXIKMghedHJ4LS4qJBIaCgVwcmljZRgCIAEoBUILukgIGgYYoMIeIAESGwoLZGVzY3JpcHRpb24YAyABKAlCBrpIA8gBARIuCghtZXRhZGF0YRgEIAMoCzIcLmFwaS52MS5DaGFyZ2UuTWV0YWRhdGFFbnRyeRJECgpleHBpcmVzX2F0GBQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIPukgMsgEJSgUIgJqeAUAASACIAQEaLwoNTWV0YWRhdGFFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBQg0KC19leHBpcmVzX2F0IqkFCgxDaGFyZ2VSZXN1bHQSJQoJY2hhcmdlX2lkGAEgASgJQhK6SA/IAQFyCjIIXnRyeC0uKiQSDAoEcGFpZBgCIAEoCBIWCgZyZWFzb24YAyABKAlCBrpIA8gBARIbCgtkZXNjcmlwdGlvbhgEIAEoCUIGukgDyAEBEh0KDW1lcmNoYW50X25hbWUYBSABKAlCBrpIA8gBARIeCg5pbml0aWFsX2Ftb3VudBgGIAEoBUIGukgDyAEBEhgKCGRpc2NvdW50GAcgASgFQga6SAPIAQESHAoMZmluYWxfYW1vdW50GAggASgFQga6SAPIAQESHAoPYW1vdW50X3JlZnVuZGVkGAkgASgFSACIAQESGAoIY3VycmVuY3kYCiABKAlCBrpIA8gBARIYCgh0b2tlbl9pZBgLIAEoCUIGukgDyAEBEjQKCG1ldGFkYXRhGAwgAygLMiIuYXBpLnYxLkNoYXJnZVJlc3VsdC5NZXRhZGF0YUVudHJ5EjYKCmNyZWF0ZWRfYXQYDSABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQga6SAPIAQESNgoKdXBkYXRlZF9hdBgOIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBARI1Cgxwcm9jZXNzZWRfYXQYDyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAGIAQESMwoNY2hhcmdlX3N0YXR1cxgQIAEoDjIULmFwaS52MS5DaGFyZ2VTdGF0dXNCBrpIA8gBARovCg1NZXRhZGF0YUVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAFCEgoQX2Ftb3VudF9yZWZ1bmRlZEIPCg1fcHJvY2Vzc2VkX2F0IscBCgtQYXltZW50TGluaxJICgN1cmwYASABKAlCO7pIOLoBMgoJdmFsaWRfdXJpEhd1cmwgbXVzdCBiZSBhIHZhbGlkIFVSSRoMdGhpcy5pc1VyaSgpyAEBEjYKCmNyZWF0ZWRfYXQYCiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQga6SAPIAQESNgoKZXhwaXJlc19hdBgLIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBASL1AQoXT25TZXNzaW9uUGF5bWVudFJlcXVlc3QSJgoIY3VzdG9tZXIYASABKAlCD7pIDHIKMgheY3VzLS4rJEgAiAEBEiEKBWJ1eWVyGAIgASgLMg0uYXBpLnYxLkJ1eWVySAGIAQESKgoGY2hhcmdlGAMgASgLMhUuYXBpLnYxLkluaXRpYWxDaGFyZ2VIAogBARIQCghvbmVfdGltZRgEIAEoCBIiCghyZWRpcmVjdBgKIAEoCzILLmFwaS52MS5VUkxIA4gBAUILCglfY3VzdG9tZXJCCAoGX2J1eWVyQgkKB19jaGFyZ2VCCwoJX3JlZGlyZWN0ImkKFU9uU2Vzc2lvblBheW1lbnRFcnJvchI3CgRjb2RlGAEgASgOMiEuYXBpLnYxLk9uU2Vzc2lvblBheW1lbnRFcnJvckNvZGVCBrpIA8gBARIXCgdtZXNzYWdlGAIgASgJQga6SAPIAQEi7QEKFE9uU2Vzc2lvblBheW1lbnREYXRhEicKCGNvbnRyYWN0GAEgASgLMhAuYXBpLnYxLkNvbnRyYWN0SACIAQESIwoGY2hhcmdlGAIgASgLMg4uYXBpLnYxLkNoYXJnZUgBiAEBEioKCGN1c3RvbWVyGAMgASgLMhAuYXBpLnYxLkN1c3RvbWVyQga6SAPIAQESMQoMcGF5bWVudF9saW5rGAQgASgLMhMuYXBpLnYxLlBheW1lbnRMaW5rQga6SAPIAQESEAoIb25lX3RpbWUYBSABKAhCCwoJX2NvbnRyYWN0QgkKB19jaGFyZ2UiogEKGE9uU2Vzc2lvblBheW1lbnRSZXNwb25zZRIPCgdzdWNjZXNzGAEgASgIEjEKBWVycm9yGAIgASgLMh0uYXBpLnYxLk9uU2Vzc2lvblBheW1lbnRFcnJvckgAiAEBEi8KBGRhdGEYAyABKAsyHC5hcGkudjEuT25TZXNzaW9uUGF5bWVudERhdGFIAYgBAUIICgZfZXJyb3JCBwoFX2RhdGEiiQEKDVJlZnVuZFJlcXVlc3QSJQoJY2hhcmdlX2lkGAEgASgJQhK6SA/IAQFyCjIIXnRyeC0uKyQSHAoGYW1vdW50GAIgASgFQge6SAQaAiAASACIAQESGAoLY2FuY2VsX29ubHkYAyABKAhIAYgBAUIJCgdfYW1vdW50Qg4KDF9jYW5jZWxfb25seSI2Cg5SZWZ1bmRSZXNwb25zZRIRCgljaGFyZ2VfaWQYASABKAkSEQoJcmVmdW5kX2lkGAIgASgJKoMFChlPblNlc3Npb25QYXltZW50RXJyb3JDb2RlEi0KKU9OX1NFU1NJT05fUEFZTUVOVF9FUlJPUl9DT0RFX1VOU1BFQ0lGSUVEEAASNwozT05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfTUlTU0lOR19SRURJUkVDVF9VUkxTEAESPQo5T05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfTUlTU0lOR19SRVFVSVJFRF9QQVJBTUVURVJTEAISMAosT05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfTUlTU0lOR19DSEFSR0UQChI0CjBPTl9TRVNTSU9OX1BBWU1FTlRfRVJST1JfQ09ERV9DVVNUT01FUl9OT1RfRk9VTkQQCxIzCi9PTl9TRVNTSU9OX1BBWU1FTlRfRVJST1JfQ09ERV9DVVNUT01FUl9JTkFDVElWRRAMEkIKPk9OX1NFU1NJT05fUEFZTUVOVF9FUlJPUl9DT0RFX01FUkNIQU5UX0NVU1RPTUVSX0FMUkVBRFlfRVhJU1RTEBQSMwovT05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfVkFMSURBVElPTl9GQUlMRUQQHhI7CjdPTl9TRVNTSU9OX1BBWU1FTlRfRVJST1JfQ09ERV9TVFJBVEVHWV9FWEVDVVRJT05fRkFJTEVEECgSOgo2T05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfSU5WQUxJRF9QQVlNRU5UX1NUUkFURUdZECkSMAosT05fU0VTU0lPTl9QQVlNRU5UX0VSUk9SX0NPREVfSU5URVJOQUxfRVJST1IQMjLQGAoOUGF5bWVudFNlcnZpY2USvQIKG0NyZWF0ZUNvbnRyYWN0V2l0aG91dENoYXJnZRIqLmFwaS52MS5DcmVhdGVDb250cmFjdFdpdGhvdXRDaGFyZ2VSZXF1ZXN0GisuYXBpLnYxLkNyZWF0ZUNvbnRyYWN0V2l0aG91dENoYXJnZVJlc3BvbnNlIsQBkkGaAQoHcGF5bWVudBI4Q3JlYXRlIGEgY29udHJhY3Qgd2l0aG91dCBpbml0aWFsIGNoYXJnZSAoY29udHJhY3Qgb25seSkaOENyZWF0ZSBhIGNvbnRyYWN0IHdpdGhvdXQgaW5pdGlhbCBjaGFyZ2UgKGNvbnRyYWN0IG9ubHkpKhtjcmVhdGVDb250cmFjdFdpdGhvdXRDaGFyZ2WC0+STAiA6ASoiGy92MS9jb250cmFjdC13aXRob3V0LWNoYXJnZRKHAgoYQ3JlYXRlQ29udHJhY3RXaXRoQ2hhcmdlEicuYXBpLnYxLkNyZWF0ZUNvbnRyYWN0V2l0aENoYXJnZVJlcXVlc3QaKC5hcGkudjEuQ3JlYXRlQ29udHJhY3RXaXRoQ2hhcmdlUmVzcG9uc2UilwGSQXEKB3BheW1lbnQSJUNyZWF0ZSBhIGNvbnRyYWN0IHdpdGggaW5pdGlhbCBjaGFyZ2UaJUNyZWF0ZSBhIGNvbnRyYWN0IHdpdGggaW5pdGlhbCBjaGFyZ2UqGGNyZWF0ZUNvbnRyYWN0V2l0aENoYXJnZYLT5JMCHToBKiIYL3YxL2NvbnRyYWN0LXdpdGgtY2hhcmdlErgBCglBZGRDaGFyZ2USGC5hcGkudjEuQWRkQ2hhcmdlUmVxdWVzdBoZLmFwaS52MS5BZGRDaGFyZ2VSZXNwb25zZSJ2kkFaCgdwYXltZW50EiFVc2UgZXhpc3RpbmcgY29udHJhY3Qgd2l0aCBjaGFyZ2UaIVVzZSBleGlzdGluZyBjb250cmFjdCB3aXRoIGNoYXJnZSoJYWRkQ2hhcmdlgtPkkwITOgEqIg4vdjEvYWRkLWNoYXJnZRKuAQoJR2V0Q2hhcmdlEhguYXBpLnYxLkdldENoYXJnZVJlcXVlc3QaGS5hcGkudjEuR2V0Q2hhcmdlUmVzcG9uc2UibJJBTgoHcGF5bWVudBIVR2V0IGEgc3BlY2lmaWMgY2hhcmdlGiFHZXQgYSBzcGVjaWZpYyBjaGFyZ2UgaW5mb3JtYXRpb24qCWdldENoYXJnZYLT5JMCFRITL3YxL2NoYXJnZS97Y2hhcmdlfRK4AQoKR2V0Q2hhcmdlcxIZLmFwaS52MS5HZXRDaGFyZ2VzUmVxdWVzdBoaLmFwaS52MS5HZXRDaGFyZ2VzUmVzcG9uc2Uic5JBUgoHcGF5bWVudBIVR2V0IGEgbGlzdCBvZiBjaGFyZ2VzGiRHZXQgYSBsaXN0IG9mIGNoYXJnZXMgZm9yIGEgY3VzdG9tZXIqCmdldENoYXJnZXOC0+STAhgSFi92MS9jaGFyZ2VzL3tjdXN0b21lcn0S7gEKCFdpdGhkcmF3EhcuYXBpLnYxLldpdGhkcmF3UmVxdWVzdBoYLmFwaS52MS5XaXRoZHJhd1Jlc3BvbnNlIq4BkkGTAQoHcGF5bWVudBI6V2l0aGRyYXcgbW9uZXkgZnJvbSBjdXN0b21lciBpbW1lZGlhdGVseSwgd2l0aG91dCByZWRpcmVjdBpCVGhpcyBjYWxsIGlzIHN5bmNocm9ub3VzLiBUaGUgbW9uZXkgd2lsbCBiZSB3aXRoZHJhd24gaW1tZWRpYXRlbHkuKgh3aXRoZHJhd4LT5JMCEToBKiIML3YxL3dpdGhkcmF3Ev8BCg1XaXRoZHJhd0FzeW5jEhwuYXBpLnYxLldpdGhkcmF3QXN5bmNSZXF1ZXN0Gh0uYXBpLnYxLldpdGhkcmF3QXN5bmNSZXNwb25zZSKwAZJBjwEKB3BheW1lbnQSIkluaXRpYXRlIGFzeW5jIHdpdGhkcmF3IChpbnRlcm5hbCkaSUludGVybmFsLW9ubHkgZW5kcG9pbnQgZm9yIGluaXRpYXRpbmcgYXN5bmNocm9ub3VzIHdpdGhkcmF3YWwgcHJvY2Vzc2luZy4qFWludGVybmFsV2l0aGRyYXdBc3luY4LT5JMCFzoBKiISL3YxL3dpdGhkcmF3L2FzeW5jEroCChZPZmZTZXNzaW9uUGF5bWVudEFzeW5jEiUuYXBpLnYxLk9mZlNlc3Npb25QYXltZW50QXN5bmNSZXF1ZXN0GiYuYXBpLnYxLk9mZlNlc3Npb25QYXltZW50QXN5bmNSZXNwb25zZSLQAZJBowEKB3BheW1lbnQSIkluaXRpYXRlIGFzeW5jIG9mZi1zZXNzaW9uIHBheW1lbnQaXFN0YXJ0cyBhc3luY2hyb25vdXMgb2ZmLXNlc3Npb24gcGF5bWVudCBwcm9jZXNzaW5nIGFuZCByZXR1cm5zIHJlcXVlc3QgdHJhY2tpbmcgaW5mb3JtYXRpb24uKhZhc3luY09mZlNlc3Npb25QYXltZW50gtPkkwIjOgEqIh4vdjEvcGF5bWVudHMvb2ZmLXNlc3Npb24vYXN5bmMSngIKE1dpdGhkcmF3QXN5bmNTdGF0dXMSIi5hcGkudjEuV2l0aGRyYXdBc3luY1N0YXR1c1JlcXVlc3QaIy5hcGkudjEuV2l0aGRyYXdBc3luY1N0YXR1c1Jlc3BvbnNlIr0BkkGVAQoHcGF5bWVudBIkR2V0IGFzeW5jIHdpdGhkcmF3IHN0YXR1cyAoaW50ZXJuYWwpGkdJbnRlcm5hbC1vbmx5IGVuZHBvaW50IGZvciByZXRyaWV2aW5nIGFzeW5jIHdpdGhkcmF3IHByb2Nlc3Npbmcgc3RhdHVzLiobaW50ZXJuYWxXaXRoZHJhd0FzeW5jU3RhdHVzgtPkkwIeOgEqIhkvdjEvd2l0aGRyYXcvYXN5bmMvc3RhdHVzEqcCChFPZmZTZXNzaW9uUGF5bWVudBIgLmFwaS52MS5PZmZTZXNzaW9uUGF5bWVudFJlcXVlc3QaIS5hcGkudjEuT2ZmU2Vzc2lvblBheW1lbnRSZXNwb25zZSLMAZJBpQEKB3BheW1lbnQSKVByb2Nlc3MgcGF5bWVudCBkaXJlY3RseSB3aXRob3V0IHJlZGlyZWN0GlxFeGVjdXRlIGEgcGF5bWVudCBvZmYtc2Vzc2lvbiB3aXRoaW4geW91ciBhcHBsaWNhdGlvbiB3aXRob3V0IHJlZGlyZWN0aW5nIHRvIGEgcGF5bWVudCBwYWdlLioRb2ZmU2Vzc2lvblBheW1lbnSC0+STAh06ASoiGC92MS9wYXltZW50cy9vZmYtc2Vzc2lvbhLBAgoQT25TZXNzaW9uUGF5bWVudBIfLmFwaS52MS5PblNlc3Npb25QYXltZW50UmVxdWVzdBogLmFwaS52MS5PblNlc3Npb25QYXltZW50UmVzcG9uc2Ui6QGSQcMBCgdwYXltZW50EiZQcm9jZXNzIHBheW1lbnQgd2l0aCBvcHRpb25hbCByZWRpcmVjdBp+VW5pZmllZCBpbnRlcmZhY2UgZm9yIGNyZWF0aW5nIHBheW1lbnRzIC0gc3VwcG9ydHMgZXhpc3RpbmcgY3VzdG9tZXJzLCBuZXcgY3VzdG9tZXJzIHdpdGggY2hhcmdlcywgYW5kIGNvbnRyYWN0LW9ubHkgY3JlYXRpb24uKhBvblNlc3Npb25QYXltZW50gtPkkwIcOgEqIhcvdjEvcGF5bWVudHMvb24tc2Vzc2lvbhKNAgoGUmVmdW5kEhUuYXBpLnYxLlJlZnVuZFJlcXVlc3QaFi5hcGkudjEuUmVmdW5kUmVzcG9uc2Ui0wGSQboBCgdwYXltZW50Eg9SZWZ1bmQgYSBjaGFyZ2UalQFSZWZ1bmRzIGEgY2hhcmdlLiBJZiB0aGUgc2FtZS1kYXkgY2FuY2VsbGF0aW9uIHdpbmRvdyBoYXMgbm90IHBhc3NlZCwgY2FuY2VscyB0aGUgY2hhcmdlIGRpcmVjdGx5LiBPdGhlcndpc2UsIGNyZWF0ZXMgYSBiYW5rIHRyYW5zZmVyIHJlZnVuZCByZXF1ZXN0LioGcmVmdW5kgtPkkwIPOgEqIgovdjEvcmVmdW5kQnAKCmNvbS5hcGkudjFCDFBheW1lbnRQcm90b1ABWhthcGkvcHJvdG8vZ2VuL2FwaS92MTthcGlfdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_api_v1_common, file_buf_validate_validate, file_google_api_annotations, file_google_protobuf_timestamp, file_protoc_gen_openapiv2_options_annotations]);
 
 /**
  * # OffSessionPaymentRequest
@@ -626,6 +626,390 @@ export const WithdrawResponseSchema: GenMessage<WithdrawResponse, WithdrawRespon
   messageDesc(file_api_v1_payment, 9);
 
 /**
+ * WithdrawAsyncRequest
+ *
+ * This message represents a request to withdraw money from a customer asynchronously.
+ * It contains the customer ID and the amount to withdraw.
+ *
+ * @generated from message api.v1.WithdrawAsyncRequest
+ */
+export type WithdrawAsyncRequest = Message<"api.v1.WithdrawAsyncRequest"> & {
+  /**
+   * Merchant customer identifier string
+   * Must start with "cus-" prefix followed by additional characters
+   * This identifier references an existing merchant customer in the system
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string customer = 1;
+   */
+  customer: string;
+
+  /**
+   * The amount to withdraw
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.InitialCharge charge = 2;
+   */
+  charge?: InitialCharge;
+};
+
+/**
+ * WithdrawAsyncRequest
+ *
+ * This message represents a request to withdraw money from a customer asynchronously.
+ * It contains the customer ID and the amount to withdraw.
+ *
+ * @generated from message api.v1.WithdrawAsyncRequest
+ */
+export type WithdrawAsyncRequestJson = {
+  /**
+   * Merchant customer identifier string
+   * Must start with "cus-" prefix followed by additional characters
+   * This identifier references an existing merchant customer in the system
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string customer = 1;
+   */
+  customer?: string;
+
+  /**
+   * The amount to withdraw
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.InitialCharge charge = 2;
+   */
+  charge?: InitialChargeJson;
+};
+
+/**
+ * Describes the message api.v1.WithdrawAsyncRequest.
+ * Use `create(WithdrawAsyncRequestSchema)` to create a new message.
+ */
+export const WithdrawAsyncRequestSchema: GenMessage<WithdrawAsyncRequest, WithdrawAsyncRequestJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_payment, 10);
+
+/**
+ * WithdrawAsyncResponse
+ *
+ * This message represents the asynchronous response after initiating a withdrawal.
+ *
+ * @generated from message api.v1.WithdrawAsyncResponse
+ */
+export type WithdrawAsyncResponse = Message<"api.v1.WithdrawAsyncResponse"> & {
+  /**
+   * The request ID for tracking the withdrawal process
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string request_id = 1;
+   */
+  requestId: string;
+
+  /**
+   * The status of the withdrawal request
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.AsyncStatus status = 2;
+   */
+  status: AsyncStatus;
+
+  /**
+   * Charge ID (trx-...) for polling via GetCharge
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string charge_id = 3;
+   */
+  chargeId: string;
+};
+
+/**
+ * WithdrawAsyncResponse
+ *
+ * This message represents the asynchronous response after initiating a withdrawal.
+ *
+ * @generated from message api.v1.WithdrawAsyncResponse
+ */
+export type WithdrawAsyncResponseJson = {
+  /**
+   * The request ID for tracking the withdrawal process
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string request_id = 1;
+   */
+  requestId?: string;
+
+  /**
+   * The status of the withdrawal request
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.AsyncStatus status = 2;
+   */
+  status?: AsyncStatusJson;
+
+  /**
+   * Charge ID (trx-...) for polling via GetCharge
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string charge_id = 3;
+   */
+  chargeId?: string;
+};
+
+/**
+ * Describes the message api.v1.WithdrawAsyncResponse.
+ * Use `create(WithdrawAsyncResponseSchema)` to create a new message.
+ */
+export const WithdrawAsyncResponseSchema: GenMessage<WithdrawAsyncResponse, WithdrawAsyncResponseJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_payment, 11);
+
+/**
+ * OffSessionPaymentAsyncRequest
+ *
+ * This message represents a request to process an off-session payment asynchronously.
+ * It contains the customer ID and the amount to charge.
+ *
+ * @generated from message api.v1.OffSessionPaymentAsyncRequest
+ */
+export type OffSessionPaymentAsyncRequest = Message<"api.v1.OffSessionPaymentAsyncRequest"> & {
+  /**
+   * Merchant customer identifier string
+   * Must start with "cus-" prefix followed by additional characters
+   * This identifier references an existing merchant customer in the system
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string customer = 1;
+   */
+  customer: string;
+
+  /**
+   * The amount to charge
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.InitialCharge charge = 2;
+   */
+  charge?: InitialCharge;
+};
+
+/**
+ * OffSessionPaymentAsyncRequest
+ *
+ * This message represents a request to process an off-session payment asynchronously.
+ * It contains the customer ID and the amount to charge.
+ *
+ * @generated from message api.v1.OffSessionPaymentAsyncRequest
+ */
+export type OffSessionPaymentAsyncRequestJson = {
+  /**
+   * Merchant customer identifier string
+   * Must start with "cus-" prefix followed by additional characters
+   * This identifier references an existing merchant customer in the system
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string customer = 1;
+   */
+  customer?: string;
+
+  /**
+   * The amount to charge
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.InitialCharge charge = 2;
+   */
+  charge?: InitialChargeJson;
+};
+
+/**
+ * Describes the message api.v1.OffSessionPaymentAsyncRequest.
+ * Use `create(OffSessionPaymentAsyncRequestSchema)` to create a new message.
+ */
+export const OffSessionPaymentAsyncRequestSchema: GenMessage<OffSessionPaymentAsyncRequest, OffSessionPaymentAsyncRequestJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_payment, 12);
+
+/**
+ * OffSessionPaymentAsyncResponse
+ *
+ * This message represents the asynchronous response after initiating an off-session payment.
+ *
+ * @generated from message api.v1.OffSessionPaymentAsyncResponse
+ */
+export type OffSessionPaymentAsyncResponse = Message<"api.v1.OffSessionPaymentAsyncResponse"> & {
+  /**
+   * The request ID for tracking the off-session payment process
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string request_id = 1;
+   */
+  requestId: string;
+
+  /**
+   * The status of the off-session payment request
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.AsyncStatus status = 2;
+   */
+  status: AsyncStatus;
+
+  /**
+   * Charge ID (trx-...) for polling via GetCharge
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string charge_id = 3;
+   */
+  chargeId: string;
+};
+
+/**
+ * OffSessionPaymentAsyncResponse
+ *
+ * This message represents the asynchronous response after initiating an off-session payment.
+ *
+ * @generated from message api.v1.OffSessionPaymentAsyncResponse
+ */
+export type OffSessionPaymentAsyncResponseJson = {
+  /**
+   * The request ID for tracking the off-session payment process
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string request_id = 1;
+   */
+  requestId?: string;
+
+  /**
+   * The status of the off-session payment request
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.AsyncStatus status = 2;
+   */
+  status?: AsyncStatusJson;
+
+  /**
+   * Charge ID (trx-...) for polling via GetCharge
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string charge_id = 3;
+   */
+  chargeId?: string;
+};
+
+/**
+ * Describes the message api.v1.OffSessionPaymentAsyncResponse.
+ * Use `create(OffSessionPaymentAsyncResponseSchema)` to create a new message.
+ */
+export const OffSessionPaymentAsyncResponseSchema: GenMessage<OffSessionPaymentAsyncResponse, OffSessionPaymentAsyncResponseJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_payment, 13);
+
+/**
+ * WithdrawAsyncStatusRequest
+ *
+ * This message represents a request to get the status of an asynchronous withdrawal.
+ *
+ * @generated from message api.v1.WithdrawAsyncStatusRequest
+ */
+export type WithdrawAsyncStatusRequest = Message<"api.v1.WithdrawAsyncStatusRequest"> & {
+  /**
+   * Request ID returned by WithdrawAsync
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string request_id = 1;
+   */
+  requestId: string;
+};
+
+/**
+ * WithdrawAsyncStatusRequest
+ *
+ * This message represents a request to get the status of an asynchronous withdrawal.
+ *
+ * @generated from message api.v1.WithdrawAsyncStatusRequest
+ */
+export type WithdrawAsyncStatusRequestJson = {
+  /**
+   * Request ID returned by WithdrawAsync
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string request_id = 1;
+   */
+  requestId?: string;
+};
+
+/**
+ * Describes the message api.v1.WithdrawAsyncStatusRequest.
+ * Use `create(WithdrawAsyncStatusRequestSchema)` to create a new message.
+ */
+export const WithdrawAsyncStatusRequestSchema: GenMessage<WithdrawAsyncStatusRequest, WithdrawAsyncStatusRequestJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_payment, 14);
+
+/**
+ * WithdrawAsyncStatusResponse
+ *
+ * This message represents the response containing the status of an asynchronous withdrawal.
+ *
+ * @generated from message api.v1.WithdrawAsyncStatusResponse
+ */
+export type WithdrawAsyncStatusResponse = Message<"api.v1.WithdrawAsyncStatusResponse"> & {
+  /**
+   * Current async processing status
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.AsyncStatus status = 1;
+   */
+  status: AsyncStatus;
+
+  /**
+   * The customer information
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.Customer customer = 2;
+   */
+  customer?: Customer;
+
+  /**
+   * Charge result when finished (present only if SUCCEEDED or FAILED)
+   *
+   * @generated from field: optional api.v1.ChargeResult charge = 3;
+   */
+  charge?: ChargeResult;
+};
+
+/**
+ * WithdrawAsyncStatusResponse
+ *
+ * This message represents the response containing the status of an asynchronous withdrawal.
+ *
+ * @generated from message api.v1.WithdrawAsyncStatusResponse
+ */
+export type WithdrawAsyncStatusResponseJson = {
+  /**
+   * Current async processing status
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.AsyncStatus status = 1;
+   */
+  status?: AsyncStatusJson;
+
+  /**
+   * The customer information
+   * @gotags: validate:"required"
+   *
+   * @generated from field: api.v1.Customer customer = 2;
+   */
+  customer?: CustomerJson;
+
+  /**
+   * Charge result when finished (present only if SUCCEEDED or FAILED)
+   *
+   * @generated from field: optional api.v1.ChargeResult charge = 3;
+   */
+  charge?: ChargeResultJson;
+};
+
+/**
+ * Describes the message api.v1.WithdrawAsyncStatusResponse.
+ * Use `create(WithdrawAsyncStatusResponseSchema)` to create a new message.
+ */
+export const WithdrawAsyncStatusResponseSchema: GenMessage<WithdrawAsyncStatusResponse, WithdrawAsyncStatusResponseJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_payment, 15);
+
+/**
  * # CreateContractWithoutChargeRequest
  *
  * Request message for creating a new contract without an initial charge.
@@ -690,7 +1074,7 @@ export type CreateContractWithoutChargeRequestJson = {
  * Use `create(CreateContractWithoutChargeRequestSchema)` to create a new message.
  */
 export const CreateContractWithoutChargeRequestSchema: GenMessage<CreateContractWithoutChargeRequest, CreateContractWithoutChargeRequestJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 10);
+  messageDesc(file_api_v1_payment, 16);
 
 /**
  * # CreateContractWithoutChargeResponse
@@ -779,7 +1163,7 @@ export type CreateContractWithoutChargeResponseJson = {
  * Use `create(CreateContractWithoutChargeResponseSchema)` to create a new message.
  */
 export const CreateContractWithoutChargeResponseSchema: GenMessage<CreateContractWithoutChargeResponse, CreateContractWithoutChargeResponseJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 11);
+  messageDesc(file_api_v1_payment, 17);
 
 /**
  * # CreateContractWithChargeRequest
@@ -864,7 +1248,7 @@ export type CreateContractWithChargeRequestJson = {
  * Use `create(CreateContractWithChargeRequestSchema)` to create a new message.
  */
 export const CreateContractWithChargeRequestSchema: GenMessage<CreateContractWithChargeRequest, CreateContractWithChargeRequestJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 12);
+  messageDesc(file_api_v1_payment, 18);
 
 /**
  * # CreateContractWithChargeResponse
@@ -971,7 +1355,7 @@ export type CreateContractWithChargeResponseJson = {
  * Use `create(CreateContractWithChargeResponseSchema)` to create a new message.
  */
 export const CreateContractWithChargeResponseSchema: GenMessage<CreateContractWithChargeResponse, CreateContractWithChargeResponseJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 13);
+  messageDesc(file_api_v1_payment, 19);
 
 /**
  * @generated from message api.v1.URL
@@ -1032,7 +1416,7 @@ export type URLJson = {
  * Use `create(URLSchema)` to create a new message.
  */
 export const URLSchema: GenMessage<URL, URLJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 14);
+  messageDesc(file_api_v1_payment, 20);
 
 /**
  * # InitialCharge
@@ -1151,7 +1535,7 @@ export type InitialChargeJson = {
  * Use `create(InitialChargeSchema)` to create a new message.
  */
 export const InitialChargeSchema: GenMessage<InitialCharge, InitialChargeJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 15);
+  messageDesc(file_api_v1_payment, 21);
 
 /**
  * # Charge
@@ -1290,7 +1674,7 @@ export type ChargeJson = {
  * Use `create(ChargeSchema)` to create a new message.
  */
 export const ChargeSchema: GenMessage<Charge, ChargeJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 16);
+  messageDesc(file_api_v1_payment, 22);
 
 /**
  * # ChargeResult
@@ -1380,6 +1764,13 @@ export type ChargeResult = Message<"api.v1.ChargeResult"> & {
    * @generated from field: optional google.protobuf.Timestamp processed_at = 15;
    */
   processedAt?: Timestamp;
+
+  /**
+   * Charge status for polling and state handling.
+   *
+   * @generated from field: api.v1.ChargeStatus charge_status = 16;
+   */
+  chargeStatus: ChargeStatus;
 };
 
 /**
@@ -1470,6 +1861,13 @@ export type ChargeResultJson = {
    * @generated from field: optional google.protobuf.Timestamp processed_at = 15;
    */
   processedAt?: TimestampJson;
+
+  /**
+   * Charge status for polling and state handling.
+   *
+   * @generated from field: api.v1.ChargeStatus charge_status = 16;
+   */
+  chargeStatus?: ChargeStatusJson;
 };
 
 /**
@@ -1477,7 +1875,7 @@ export type ChargeResultJson = {
  * Use `create(ChargeResultSchema)` to create a new message.
  */
 export const ChargeResultSchema: GenMessage<ChargeResult, ChargeResultJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 17);
+  messageDesc(file_api_v1_payment, 23);
 
 /**
  * # PaymentLink
@@ -1542,7 +1940,7 @@ export type PaymentLinkJson = {
  * Use `create(PaymentLinkSchema)` to create a new message.
  */
 export const PaymentLinkSchema: GenMessage<PaymentLink, PaymentLinkJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 18);
+  messageDesc(file_api_v1_payment, 24);
 
 /**
  * # OnSessionPaymentRequest
@@ -1579,6 +1977,21 @@ export type OnSessionPaymentRequest = Message<"api.v1.OnSessionPaymentRequest"> 
    * @generated from field: optional api.v1.InitialCharge charge = 3;
    */
   charge?: InitialCharge;
+
+  /**
+   * Defaults to false if not provided.
+   * If true, the charge is processed as a one-time payment and no contract is created.
+   * If provided without a customer ID, the system will create a new customer.
+   * Requires charge to be present.
+   *
+   * 未指定の場合はfalseがデフォルトです。
+   * trueの場合、決済は一回限りの支払いとして処理され、契約は作成されません。
+   * customer IDが提供されていない場合、新規顧客が作成されます。
+   * chargeが必須です。
+   *
+   * @generated from field: bool one_time = 4;
+   */
+  oneTime: boolean;
 
   /**
    * Optional redirect URLs for payment completion
@@ -1627,6 +2040,21 @@ export type OnSessionPaymentRequestJson = {
   charge?: InitialChargeJson;
 
   /**
+   * Defaults to false if not provided.
+   * If true, the charge is processed as a one-time payment and no contract is created.
+   * If provided without a customer ID, the system will create a new customer.
+   * Requires charge to be present.
+   *
+   * 未指定の場合はfalseがデフォルトです。
+   * trueの場合、決済は一回限りの支払いとして処理され、契約は作成されません。
+   * customer IDが提供されていない場合、新規顧客が作成されます。
+   * chargeが必須です。
+   *
+   * @generated from field: bool one_time = 4;
+   */
+  oneTime?: boolean;
+
+  /**
    * Optional redirect URLs for payment completion
    * If not provided, the user won't redirect to the merchant's page upon completing the payment
    * Used in payment flows to direct the customer after payment processing
@@ -1641,7 +2069,7 @@ export type OnSessionPaymentRequestJson = {
  * Use `create(OnSessionPaymentRequestSchema)` to create a new message.
  */
 export const OnSessionPaymentRequestSchema: GenMessage<OnSessionPaymentRequest, OnSessionPaymentRequestJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 19);
+  messageDesc(file_api_v1_payment, 25);
 
 /**
  * Error message structure for OnSessionPayment API
@@ -1690,7 +2118,7 @@ export type OnSessionPaymentErrorJson = {
  * Use `create(OnSessionPaymentErrorSchema)` to create a new message.
  */
 export const OnSessionPaymentErrorSchema: GenMessage<OnSessionPaymentError, OnSessionPaymentErrorJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 20);
+  messageDesc(file_api_v1_payment, 26);
 
 /**
  * Success data structure for OnSessionPayment API
@@ -1732,6 +2160,13 @@ export type OnSessionPaymentData = Message<"api.v1.OnSessionPaymentData"> & {
    * @generated from field: api.v1.PaymentLink payment_link = 4;
    */
   paymentLink?: PaymentLink;
+
+  /**
+   * Indicates if the charge is a one-time payment
+   *
+   * @generated from field: bool one_time = 5;
+   */
+  oneTime: boolean;
 };
 
 /**
@@ -1774,6 +2209,13 @@ export type OnSessionPaymentDataJson = {
    * @generated from field: api.v1.PaymentLink payment_link = 4;
    */
   paymentLink?: PaymentLinkJson;
+
+  /**
+   * Indicates if the charge is a one-time payment
+   *
+   * @generated from field: bool one_time = 5;
+   */
+  oneTime?: boolean;
 };
 
 /**
@@ -1781,7 +2223,7 @@ export type OnSessionPaymentDataJson = {
  * Use `create(OnSessionPaymentDataSchema)` to create a new message.
  */
 export const OnSessionPaymentDataSchema: GenMessage<OnSessionPaymentData, OnSessionPaymentDataJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 21);
+  messageDesc(file_api_v1_payment, 27);
 
 /**
  * # OnSessionPaymentResponse
@@ -1854,7 +2296,159 @@ export type OnSessionPaymentResponseJson = {
  * Use `create(OnSessionPaymentResponseSchema)` to create a new message.
  */
 export const OnSessionPaymentResponseSchema: GenMessage<OnSessionPaymentResponse, OnSessionPaymentResponseJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_payment, 22);
+  messageDesc(file_api_v1_payment, 28);
+
+/**
+ * # RefundRequest
+ *
+ * Request message for refunding a charge.
+ * The refund is always processed asynchronously. The final result is
+ * delivered via webhook (`refund_succeeded`).
+ *
+ * @generated from message api.v1.RefundRequest
+ */
+export type RefundRequest = Message<"api.v1.RefundRequest"> & {
+  /**
+   * The charge ID to refund.
+   *
+   * 返金する決済のID。
+   *
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string charge_id = 1;
+   */
+  chargeId: string;
+
+  /**
+   * Optional refund amount in JPY.
+   * If omitted, the full refundable amount is used.
+   *
+   * 返金金額（日本円）。
+   * 省略した場合、全額返金となります。
+   *
+   * @generated from field: optional int32 amount = 2;
+   */
+  amount?: number;
+
+  /**
+   * When true, only attempts cancellation without falling back to bank
+   * transfer refund. Defaults to false (fallback enabled).
+   *
+   * trueの場合、キャンセルのみを試行し、銀行振込返金への
+   * フォールバックを行いません。デフォルトはfalse（フォールバック有効）。
+   *
+   * @generated from field: optional bool cancel_only = 3;
+   */
+  cancelOnly?: boolean;
+};
+
+/**
+ * # RefundRequest
+ *
+ * Request message for refunding a charge.
+ * The refund is always processed asynchronously. The final result is
+ * delivered via webhook (`refund_succeeded`).
+ *
+ * @generated from message api.v1.RefundRequest
+ */
+export type RefundRequestJson = {
+  /**
+   * The charge ID to refund.
+   *
+   * 返金する決済のID。
+   *
+   * @gotags: validate:"required"
+   *
+   * @generated from field: string charge_id = 1;
+   */
+  chargeId?: string;
+
+  /**
+   * Optional refund amount in JPY.
+   * If omitted, the full refundable amount is used.
+   *
+   * 返金金額（日本円）。
+   * 省略した場合、全額返金となります。
+   *
+   * @generated from field: optional int32 amount = 2;
+   */
+  amount?: number;
+
+  /**
+   * When true, only attempts cancellation without falling back to bank
+   * transfer refund. Defaults to false (fallback enabled).
+   *
+   * trueの場合、キャンセルのみを試行し、銀行振込返金への
+   * フォールバックを行いません。デフォルトはfalse（フォールバック有効）。
+   *
+   * @generated from field: optional bool cancel_only = 3;
+   */
+  cancelOnly?: boolean;
+};
+
+/**
+ * Describes the message api.v1.RefundRequest.
+ * Use `create(RefundRequestSchema)` to create a new message.
+ */
+export const RefundRequestSchema: GenMessage<RefundRequest, RefundRequestJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_payment, 29);
+
+/**
+ * # RefundResponse
+ *
+ * Response message for the Refund endpoint.
+ * A successful response means the refund request was accepted and is being
+ * processed. The final result is delivered via webhook.
+ *
+ * @generated from message api.v1.RefundResponse
+ */
+export type RefundResponse = Message<"api.v1.RefundResponse"> & {
+  /**
+   * The charge ID that the refund was requested for.
+   *
+   * @generated from field: string charge_id = 1;
+   */
+  chargeId: string;
+
+  /**
+   * The external refund ID for tracking this refund request.
+   *
+   * @generated from field: string refund_id = 2;
+   */
+  refundId: string;
+};
+
+/**
+ * # RefundResponse
+ *
+ * Response message for the Refund endpoint.
+ * A successful response means the refund request was accepted and is being
+ * processed. The final result is delivered via webhook.
+ *
+ * @generated from message api.v1.RefundResponse
+ */
+export type RefundResponseJson = {
+  /**
+   * The charge ID that the refund was requested for.
+   *
+   * @generated from field: string charge_id = 1;
+   */
+  chargeId?: string;
+
+  /**
+   * The external refund ID for tracking this refund request.
+   *
+   * @generated from field: string refund_id = 2;
+   */
+  refundId?: string;
+};
+
+/**
+ * Describes the message api.v1.RefundResponse.
+ * Use `create(RefundResponseSchema)` to create a new message.
+ */
+export const RefundResponseSchema: GenMessage<RefundResponse, RefundResponseJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_payment, 30);
 
 /**
  * @generated from enum api.v1.OnSessionPaymentErrorCode
@@ -1953,12 +2547,22 @@ export enum OnSessionPaymentErrorCode {
    * @generated from enum value: ON_SESSION_PAYMENT_ERROR_CODE_INVALID_PAYMENT_STRATEGY = 41;
    */
   INVALID_PAYMENT_STRATEGY = 41,
+
+  /**
+   * Internal server error
+   * Occurs when an unexpected error happens during request processing
+   * such as database connection failures, network issues, or other
+   * infrastructure problems unrelated to the request itself
+   *
+   * @generated from enum value: ON_SESSION_PAYMENT_ERROR_CODE_INTERNAL_ERROR = 50;
+   */
+  INTERNAL_ERROR = 50,
 }
 
 /**
  * @generated from enum api.v1.OnSessionPaymentErrorCode
  */
-export type OnSessionPaymentErrorCodeJson = "ON_SESSION_PAYMENT_ERROR_CODE_UNSPECIFIED" | "ON_SESSION_PAYMENT_ERROR_CODE_MISSING_REDIRECT_URLS" | "ON_SESSION_PAYMENT_ERROR_CODE_MISSING_REQUIRED_PARAMETERS" | "ON_SESSION_PAYMENT_ERROR_CODE_MISSING_CHARGE" | "ON_SESSION_PAYMENT_ERROR_CODE_CUSTOMER_NOT_FOUND" | "ON_SESSION_PAYMENT_ERROR_CODE_CUSTOMER_INACTIVE" | "ON_SESSION_PAYMENT_ERROR_CODE_MERCHANT_CUSTOMER_ALREADY_EXISTS" | "ON_SESSION_PAYMENT_ERROR_CODE_VALIDATION_FAILED" | "ON_SESSION_PAYMENT_ERROR_CODE_STRATEGY_EXECUTION_FAILED" | "ON_SESSION_PAYMENT_ERROR_CODE_INVALID_PAYMENT_STRATEGY";
+export type OnSessionPaymentErrorCodeJson = "ON_SESSION_PAYMENT_ERROR_CODE_UNSPECIFIED" | "ON_SESSION_PAYMENT_ERROR_CODE_MISSING_REDIRECT_URLS" | "ON_SESSION_PAYMENT_ERROR_CODE_MISSING_REQUIRED_PARAMETERS" | "ON_SESSION_PAYMENT_ERROR_CODE_MISSING_CHARGE" | "ON_SESSION_PAYMENT_ERROR_CODE_CUSTOMER_NOT_FOUND" | "ON_SESSION_PAYMENT_ERROR_CODE_CUSTOMER_INACTIVE" | "ON_SESSION_PAYMENT_ERROR_CODE_MERCHANT_CUSTOMER_ALREADY_EXISTS" | "ON_SESSION_PAYMENT_ERROR_CODE_VALIDATION_FAILED" | "ON_SESSION_PAYMENT_ERROR_CODE_STRATEGY_EXECUTION_FAILED" | "ON_SESSION_PAYMENT_ERROR_CODE_INVALID_PAYMENT_STRATEGY" | "ON_SESSION_PAYMENT_ERROR_CODE_INTERNAL_ERROR";
 
 /**
  * Describes the enum api.v1.OnSessionPaymentErrorCode.
@@ -2119,6 +2723,49 @@ export const PaymentService: GenService<{
     output: typeof WithdrawResponseSchema;
   },
   /**
+   * UNDER DEVELOPMENT: For internal use only.
+   *
+   * WithdrawAsync
+   *
+   * Initiates a withdrawal asynchronously without redirect.
+   * This endpoint is intended for internal workflows and background processing.
+   * Not exposed for public SDK usage.
+   *
+   * @generated from rpc api.v1.PaymentService.WithdrawAsync
+   */
+  withdrawAsync: {
+    methodKind: "unary";
+    input: typeof WithdrawAsyncRequestSchema;
+    output: typeof WithdrawAsyncResponseSchema;
+  },
+  /**
+   * ## OffSessionPaymentAsync
+   *
+   * Initiates an off-session payment asynchronously without redirect.
+   * Returns request tracking information for polling progress.
+   *
+   * @generated from rpc api.v1.PaymentService.OffSessionPaymentAsync
+   */
+  offSessionPaymentAsync: {
+    methodKind: "unary";
+    input: typeof OffSessionPaymentAsyncRequestSchema;
+    output: typeof OffSessionPaymentAsyncResponseSchema;
+  },
+  /**
+   * UNDER DEVELOPMENT: For internal use only.
+   * WithdrawAsyncStatus
+   *
+   * Long polling endpoint to fetch async withdraw status.
+   * Clients can poll this endpoint using request_id returned from WithdrawAsync.
+   *
+   * @generated from rpc api.v1.PaymentService.WithdrawAsyncStatus
+   */
+  withdrawAsyncStatus: {
+    methodKind: "unary";
+    input: typeof WithdrawAsyncStatusRequestSchema;
+    output: typeof WithdrawAsyncStatusResponseSchema;
+  },
+  /**
    * ## OffSessionPayment
    *
    * Processes a payment directly within your application without requiring redirects.
@@ -2165,7 +2812,7 @@ export const PaymentService: GenService<{
    * ```go
    * func (s *paymentService) OnSessionPayment(ctx context.Context, req *OnSessionPaymentRequest) (*OnSessionPaymentResponse, error) {
    *   // Determines appropriate payment strategy based on request parameters
-   *   // Routes to AddCharge, CreateContractWithCharge, or CreateContractWithoutCharge
+   *   // Routes to AddCharge, CreateContractWithCharge, CreateContractWithoutCharge, or OneTimeCharge
    *   // Returns standardized response with payment link and relevant details
    * }
    * ```
@@ -2176,6 +2823,30 @@ export const PaymentService: GenService<{
     methodKind: "unary";
     input: typeof OnSessionPaymentRequestSchema;
     output: typeof OnSessionPaymentResponseSchema;
+  },
+  /**
+   * ## Refund
+   *
+   * Refunds a charge. This endpoint is asynchronous — it accepts the refund
+   * request and processes it in the background. The final result is delivered via
+   * the `refund_succeeded` webhook.
+   *
+   * Internally, if the same-day (midnight JST from when the charge was created)
+   * cancellation window has not passed, the system cancels the charge directly.
+   * Otherwise, it creates a bank transfer refund request.
+   *
+   * **Parameters:**
+   * - RefundRequest: Contains the charge ID and optional refund amount
+   *
+   * **Returns:**
+   * - RefundResponse: Contains the charge ID and refund ID for the accepted request
+   *
+   * @generated from rpc api.v1.PaymentService.Refund
+   */
+  refund: {
+    methodKind: "unary";
+    input: typeof RefundRequestSchema;
+    output: typeof RefundResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_api_v1_payment, 0);

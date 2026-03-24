@@ -1,4 +1,4 @@
-import config from "./lib/config";
+import config, { Mode } from "./lib/config";
 import customer from "./services/customer";
 import healthcheck from "./services/healthcheck";
 import payment from "./services/payment";
@@ -17,4 +17,28 @@ export default {
     payment,
     types,
     webhook,
+    Mode,
 }
+
+// Export Mode separately for easier access
+export { Mode };
+
+// Export shared types
+export type { PlatformOptions } from "./types";
+
+// Export input types for platform mode
+export type {
+    CreateCustomerInput,
+    UpdateCustomerInput,
+    UpdateInput,
+} from "./services/customer";
+
+export type {
+    OnSessionPaymentInput,
+    OffSessionPaymentInput,
+    GetChargesInput,
+} from "./services/payment";
+
+export type {
+    PingInput,
+} from "./services/healthcheck";

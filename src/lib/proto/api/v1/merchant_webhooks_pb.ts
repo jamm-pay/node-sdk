@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file api/v1/merchant_webhooks.proto.
  */
 export const file_api_v1_merchant_webhooks: GenFile = /*@__PURE__*/
-  fileDesc("Ch5hcGkvdjEvbWVyY2hhbnRfd2ViaG9va3MucHJvdG8SBmFwaS52MSIOCgxFcnJvclJlcXVlc3QiQAoNRXJyb3JSZXNwb25zZRIvCgplcnJvcl90eXBlGAEgASgOMhMuZXJyb3IudjEuRXJyb3JUeXBlQga6SAPIAQEiEAoOTWVzc2FnZVJlcXVlc3QijwIKD01lc3NhZ2VSZXNwb25zZRJIChhtZXJjaGFudF93ZWJob29rX21lc3NhZ2UYASABKAsyHi5hcGkudjEuTWVyY2hhbnRXZWJob29rTWVzc2FnZUIGukgDyAEBEjUKDmNoYXJnZV9tZXNzYWdlGAIgASgLMhUuYXBpLnYxLkNoYXJnZU1lc3NhZ2VCBrpIA8gBARI5ChBjb250cmFjdF9tZXNzYWdlGAMgASgLMhcuYXBpLnYxLkNvbnRyYWN0TWVzc2FnZUIGukgDyAEBEkAKFHVzZXJfYWNjb3VudF9tZXNzYWdlGAQgASgLMhouYXBpLnYxLlVzZXJBY2NvdW50TWVzc2FnZUIGukgDyAEBIt4BChZNZXJjaGFudFdlYmhvb2tNZXNzYWdlEhIKAmlkGAEgASgJQga6SAPIAQESGQoJc2lnbmF0dXJlGAIgASgJQga6SAPIAQESLQoKZXZlbnRfdHlwZRgEIAEoDjIRLmFwaS52MS5FdmVudFR5cGVCBrpIA8gBARItCgdjb250ZW50GAUgASgLMhQuZ29vZ2xlLnByb3RvYnVmLkFueUIGukgDyAEBEjcKCmNyZWF0ZWRfYXQY5wcgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIGukgDyAEBIosFCg1DaGFyZ2VNZXNzYWdlEh4KAmlkGAEgASgJQhK6SA/IAQFyCjIIXnRyeC0uKiQSJAoIY3VzdG9tZXIYAiABKAlCErpID8gBAXIKMgheY3VzLS4qJBI0CgZzdGF0dXMYAyABKA4yHC5hcGkudjEuQ2hhcmdlTWVzc2FnZS5TdGF0dXNCBrpIA8gBARIbCgtkZXNjcmlwdGlvbhgEIAEoCUIGukgDyAEBEh0KDW1lcmNoYW50X25hbWUYBSABKAlCBrpIA8gBARIeCg5pbml0aWFsX2Ftb3VudBgGIAEoBUIGukgDyAEBEhgKCGRpc2NvdW50GAcgASgFQga6SAPIAQESHAoMZmluYWxfYW1vdW50GAggASgFQga6SAPIAQESHAoPYW1vdW50X3JlZnVuZGVkGAkgASgFSACIAQESGAoIY3VycmVuY3kYCiABKAlCBrpIA8gBARIZCgxwcm9jZXNzZWRfYXQYCyABKAlIAYgBARIaCgpjcmVhdGVkX2F0GA0gASgJQga6SAPIAQESGgoKdXBkYXRlZF9hdBgOIAEoCUIGukgDyAEBEiEKBWVycm9yGBQgASgLMg0uYXBpLnYxLkVycm9ySAKIAQEijAEKBlN0YXR1cxIWChJTVEFUVVNfVU5TUEVDSUZJRUQQABISCg5TVEFUVVNfU1VDQ0VTUxABEhIKDlNUQVRVU19GQUlMVVJFEAISFwoTU1RBVFVTX1dBSVRJTkdfRUtZQxADEhMKD1NUQVRVU19CTE9DS0lORxAEEhQKEFNUQVRVU19DQU5DRUxMRUQQBUISChBfYW1vdW50X3JlZnVuZGVkQg8KDV9wcm9jZXNzZWRfYXRCCAoGX2Vycm9yIpABCg9Db250cmFjdE1lc3NhZ2USJAoIY3VzdG9tZXIYASABKAlCErpID8gBAXIKMgheY3VzLS4qJBIaCgpjcmVhdGVkX2F0GAIgASgJQga6SAPIAQESHAoMYWN0aXZhdGVkX2F0GAMgASgJQga6SAPIAQESHQoNbWVyY2hhbnRfbmFtZRgEIAEoCUIGukgDyAEBIowBChJVc2VyQWNjb3VudE1lc3NhZ2USJAoIY3VzdG9tZXIYASABKAlCErpID8gBAXIKMgheY3VzLS4qJBIVCgVlbWFpbBgCIAEoCUIGukgDyAEBEhoKCmRlbGV0ZWRfYXQYAyABKAlCBrpIA8gBARIdCg1tZXJjaGFudF9uYW1lGAQgASgJQga6SAPIAQEiZgoFRXJyb3ISFAoEY29kZRgBIAEoCUIGukgDyAEBEhcKB21lc3NhZ2UYAiABKAlCBrpIA8gBARIuCgdkZXRhaWxzGAMgAygLMhMuYXBpLnYxLkVycm9yRGV0YWlsQgi6SAWSAQIIASJJCgtFcnJvckRldGFpbBIUCgR0eXBlGAEgASgJQga6SAPIAQESFQoFdmFsdWUYAiABKAlCBrpIA8gBARINCgVkZWJ1ZxgDIAEoCSqeAgoJRXZlbnRUeXBlEhoKFkVWRU5UX1RZUEVfVU5TUEVDSUZJRUQQABIdChlFVkVOVF9UWVBFX0NIQVJHRV9DUkVBVEVEEAMSHQoZRVZFTlRfVFlQRV9DSEFSR0VfVVBEQVRFRBAEEh0KGUVWRU5UX1RZUEVfQ0hBUkdFX1NVQ0NFU1MQBRIaChZFVkVOVF9UWVBFX0NIQVJHRV9GQUlMEAYSHAoYRVZFTlRfVFlQRV9DSEFSR0VfQ0FOQ0VMEAcSIQodRVZFTlRfVFlQRV9DT05UUkFDVF9BQ1RJVkFURUQQFBIjCh9FVkVOVF9UWVBFX1VTRVJfQUNDT1VOVF9ERUxFVEVEEB4SFgoSRVZFTlRfVFlQRV9URVNUSU5HEGMyrAEKDldlYmhvb2tTZXJ2aWNlEkgKBUVycm9yEhQuYXBpLnYxLkVycm9yUmVxdWVzdBoVLmFwaS52MS5FcnJvclJlc3BvbnNlIhKC0+STAgw6ASoiBy9lcnJvcnMSUAoHTWVzc2FnZRIWLmFwaS52MS5NZXNzYWdlUmVxdWVzdBoXLmFwaS52MS5NZXNzYWdlUmVzcG9uc2UiFILT5JMCDjoBKiIJL3dlYmhvb2tzQnkKCmNvbS5hcGkudjFCFU1lcmNoYW50V2ViaG9va3NQcm90b1ABWhthcGkvcHJvdG8vZ2VuL2FwaS92MTthcGlfdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_error_v1_error, file_google_api_annotations, file_google_protobuf_any, file_google_protobuf_timestamp]);
+  fileDesc("Ch5hcGkvdjEvbWVyY2hhbnRfd2ViaG9va3MucHJvdG8SBmFwaS52MSIOCgxFcnJvclJlcXVlc3QiQAoNRXJyb3JSZXNwb25zZRIvCgplcnJvcl90eXBlGAEgASgOMhMuZXJyb3IudjEuRXJyb3JUeXBlQga6SAPIAQEiEAoOTWVzc2FnZVJlcXVlc3QiwAIKD01lc3NhZ2VSZXNwb25zZRJIChhtZXJjaGFudF93ZWJob29rX21lc3NhZ2UYASABKAsyHi5hcGkudjEuTWVyY2hhbnRXZWJob29rTWVzc2FnZUIGukgDyAEBEjUKDmNoYXJnZV9tZXNzYWdlGAIgASgLMhUuYXBpLnYxLkNoYXJnZU1lc3NhZ2VCBrpIA8gBARI5ChBjb250cmFjdF9tZXNzYWdlGAMgASgLMhcuYXBpLnYxLkNvbnRyYWN0TWVzc2FnZUIGukgDyAEBEkAKFHVzZXJfYWNjb3VudF9tZXNzYWdlGAQgASgLMhouYXBpLnYxLlVzZXJBY2NvdW50TWVzc2FnZUIGukgDyAEBEi8KC3JlZnVuZF9pbmZvGAUgASgLMhIuYXBpLnYxLlJlZnVuZEluZm9CBrpIA8gBASLeAQoWTWVyY2hhbnRXZWJob29rTWVzc2FnZRISCgJpZBgBIAEoCUIGukgDyAEBEhkKCXNpZ25hdHVyZRgCIAEoCUIGukgDyAEBEi0KCmV2ZW50X3R5cGUYBCABKA4yES5hcGkudjEuRXZlbnRUeXBlQga6SAPIAQESLQoHY29udGVudBgFIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlCBrpIA8gBARI3CgpjcmVhdGVkX2F0GOcHIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCBrpIA8gBASKeBwoNQ2hhcmdlTWVzc2FnZRIeCgJpZBgBIAEoCUISukgPyAEBcgoyCF50cngtLiokEiQKCGN1c3RvbWVyGAIgASgJQhK6SA/IAQFyCjIIXmN1cy0uKiQSNAoGc3RhdHVzGAMgASgOMhwuYXBpLnYxLkNoYXJnZU1lc3NhZ2UuU3RhdHVzQga6SAPIAQESGwoLZGVzY3JpcHRpb24YBCABKAlCBrpIA8gBARIdCg1tZXJjaGFudF9uYW1lGAUgASgJQga6SAPIAQESHgoOaW5pdGlhbF9hbW91bnQYBiABKAVCBrpIA8gBARIYCghkaXNjb3VudBgHIAEoBUIGukgDyAEBEhwKDGZpbmFsX2Ftb3VudBgIIAEoBUIGukgDyAEBEhwKD2Ftb3VudF9yZWZ1bmRlZBgJIAEoBUgAiAEBEhgKCGN1cnJlbmN5GAogASgJQga6SAPIAQESGQoMcHJvY2Vzc2VkX2F0GAsgASgJSAGIAQESFQoIamFtbV9mZWUYDCABKAVIAogBARIaCgpjcmVhdGVkX2F0GA0gASgJQga6SAPIAQESGgoKdXBkYXRlZF9hdBgOIAEoCUIGukgDyAEBEioKHW9yaWdpbmFsX3RyYW5zYWN0aW9uX2phbW1fZmVlGA8gASgJSAOIAQESHAoPY29uc3VtcHRpb25fdGF4GBAgASgFSASIAQESIQoFZXJyb3IYFCABKAsyDS5hcGkudjEuRXJyb3JIBYgBARIWCglyZWZ1bmRfaWQYFSABKAlIBogBARInCgZyZWZ1bmQYFiABKAsyEi5hcGkudjEuUmVmdW5kSW5mb0gHiAEBIqEBCgZTdGF0dXMSFgoSU1RBVFVTX1VOU1BFQ0lGSUVEEAASEgoOU1RBVFVTX1NVQ0NFU1MQARISCg5TVEFUVVNfRkFJTFVSRRACEhcKE1NUQVRVU19XQUlUSU5HX0VLWUMQAxITCg9TVEFUVVNfQkxPQ0tJTkcQBBIUChBTVEFUVVNfQ0FOQ0VMTEVEEAUSEwoPU1RBVFVTX1JFRlVOREVEEAZCEgoQX2Ftb3VudF9yZWZ1bmRlZEIPCg1fcHJvY2Vzc2VkX2F0QgsKCV9qYW1tX2ZlZUIgCh5fb3JpZ2luYWxfdHJhbnNhY3Rpb25famFtbV9mZWVCEgoQX2NvbnN1bXB0aW9uX3RheEIICgZfZXJyb3JCDAoKX3JlZnVuZF9pZEIJCgdfcmVmdW5kIuUCCgpSZWZ1bmRJbmZvEhYKCXJlZnVuZF9pZBgBIAEoCUgAiAEBEhwKD2Ftb3VudF9yZWZ1bmRlZBgCIAEoBUgBiAEBEhUKCGphbW1fZmVlGAMgASgFSAKIAQESHAoPY29uc3VtcHRpb25fdGF4GAQgASgFSAOIAQESLAofb3JpZ2luYWxfdHJhbnNhY3Rpb25fZmVlX3dhaXZlZBgFIAEoCEgEiAEBEiEKBWVycm9yGAYgASgLMg0uYXBpLnYxLkVycm9ySAWIAQESGQoMcHJvY2Vzc2VkX2F0GAcgASgJSAaIAQFCDAoKX3JlZnVuZF9pZEISChBfYW1vdW50X3JlZnVuZGVkQgsKCV9qYW1tX2ZlZUISChBfY29uc3VtcHRpb25fdGF4QiIKIF9vcmlnaW5hbF90cmFuc2FjdGlvbl9mZWVfd2FpdmVkQggKBl9lcnJvckIPCg1fcHJvY2Vzc2VkX2F0IpABCg9Db250cmFjdE1lc3NhZ2USJAoIY3VzdG9tZXIYASABKAlCErpID8gBAXIKMgheY3VzLS4qJBIaCgpjcmVhdGVkX2F0GAIgASgJQga6SAPIAQESHAoMYWN0aXZhdGVkX2F0GAMgASgJQga6SAPIAQESHQoNbWVyY2hhbnRfbmFtZRgEIAEoCUIGukgDyAEBIowBChJVc2VyQWNjb3VudE1lc3NhZ2USJAoIY3VzdG9tZXIYASABKAlCErpID8gBAXIKMgheY3VzLS4qJBIVCgVlbWFpbBgCIAEoCUIGukgDyAEBEhoKCmRlbGV0ZWRfYXQYAyABKAlCBrpIA8gBARIdCg1tZXJjaGFudF9uYW1lGAQgASgJQga6SAPIAQEiZgoFRXJyb3ISFAoEY29kZRgBIAEoCUIGukgDyAEBEhcKB21lc3NhZ2UYAiABKAlCBrpIA8gBARIuCgdkZXRhaWxzGAMgAygLMhMuYXBpLnYxLkVycm9yRGV0YWlsQgi6SAWSAQIIASJJCgtFcnJvckRldGFpbBIUCgR0eXBlGAEgASgJQga6SAPIAQESFQoFdmFsdWUYAiABKAlCBrpIA8gBARINCgVkZWJ1ZxgDIAEoCSq/AgoJRXZlbnRUeXBlEhoKFkVWRU5UX1RZUEVfVU5TUEVDSUZJRUQQABIdChlFVkVOVF9UWVBFX0NIQVJHRV9DUkVBVEVEEAMSHQoZRVZFTlRfVFlQRV9DSEFSR0VfVVBEQVRFRBAEEh0KGUVWRU5UX1RZUEVfQ0hBUkdFX1NVQ0NFU1MQBRIaChZFVkVOVF9UWVBFX0NIQVJHRV9GQUlMEAYSHwobRVZFTlRfVFlQRV9SRUZVTkRfU1VDQ0VFREVEEAcSHAoYRVZFTlRfVFlQRV9SRUZVTkRfRkFJTEVEEAgSIQodRVZFTlRfVFlQRV9DT05UUkFDVF9BQ1RJVkFURUQQFBIjCh9FVkVOVF9UWVBFX1VTRVJfQUNDT1VOVF9ERUxFVEVEEB4SFgoSRVZFTlRfVFlQRV9URVNUSU5HEGMyrAEKDldlYmhvb2tTZXJ2aWNlEkgKBUVycm9yEhQuYXBpLnYxLkVycm9yUmVxdWVzdBoVLmFwaS52MS5FcnJvclJlc3BvbnNlIhKC0+STAgw6ASoiBy9lcnJvcnMSUAoHTWVzc2FnZRIWLmFwaS52MS5NZXNzYWdlUmVxdWVzdBoXLmFwaS52MS5NZXNzYWdlUmVzcG9uc2UiFILT5JMCDjoBKiIJL3dlYmhvb2tzQnkKCmNvbS5hcGkudjFCFU1lcmNoYW50V2ViaG9va3NQcm90b1ABWhthcGkvcHJvdG8vZ2VuL2FwaS92MTthcGlfdjGiAgNBWFiqAgZBcGkuVjHKAgZBcGlcVjHiAhJBcGlcVjFcR1BCTWV0YWRhdGHqAgdBcGk6OlYxYgZwcm90bzM", [file_buf_validate_validate, file_error_v1_error, file_google_api_annotations, file_google_protobuf_any, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message api.v1.ErrorRequest
@@ -109,6 +109,11 @@ export type MessageResponse = Message<"api.v1.MessageResponse"> & {
    * @generated from field: api.v1.UserAccountMessage user_account_message = 4;
    */
   userAccountMessage?: UserAccountMessage;
+
+  /**
+   * @generated from field: api.v1.RefundInfo refund_info = 5;
+   */
+  refundInfo?: RefundInfo;
 };
 
 /**
@@ -137,6 +142,11 @@ export type MessageResponseJson = {
    * @generated from field: api.v1.UserAccountMessage user_account_message = 4;
    */
   userAccountMessage?: UserAccountMessageJson;
+
+  /**
+   * @generated from field: api.v1.RefundInfo refund_info = 5;
+   */
+  refundInfo?: RefundInfoJson;
 };
 
 /**
@@ -271,21 +281,29 @@ export type ChargeMessage = Message<"api.v1.ChargeMessage"> & {
   merchantName: string;
 
   /**
+   * Original charge amount before discount and before any refund is applied.
+   *
    * @generated from field: int32 initial_amount = 6;
    */
   initialAmount: number;
 
   /**
+   * Discount amount deducted from the original charge amount.
+   *
    * @generated from field: int32 discount = 7;
    */
   discount: number;
 
   /**
+   * Final charge amount after discount, before any refund is applied.
+   *
    * @generated from field: int32 final_amount = 8;
    */
   finalAmount: number;
 
   /**
+   * Total amount refunded for this charge when the charge has been refunded.
+   *
    * @generated from field: optional int32 amount_refunded = 9;
    */
   amountRefunded?: number;
@@ -296,9 +314,18 @@ export type ChargeMessage = Message<"api.v1.ChargeMessage"> & {
   currency: string;
 
   /**
+   * Timestamp when the charge or refund outcome was completed.
+   *
    * @generated from field: optional string processed_at = 11;
    */
   processedAt?: string;
+
+  /**
+   * Jamm fee associated with this refund event (refund uses refund fee; cancel uses 0).
+   *
+   * @generated from field: optional int32 jamm_fee = 12;
+   */
+  jammFee?: number;
 
   /**
    * @generated from field: string created_at = 13;
@@ -311,9 +338,38 @@ export type ChargeMessage = Message<"api.v1.ChargeMessage"> & {
   updatedAt: string;
 
   /**
+   * Whether the original transaction's Jamm fee was waived (same-day cancel) or not (refund).
+   * Values: "waived", "not_waived".
+   *
+   * @generated from field: optional string original_transaction_jamm_fee = 15;
+   */
+  originalTransactionJammFee?: string;
+
+  /**
+   * Consumption tax (10% of the Jamm fee).
+   *
+   * @generated from field: optional int32 consumption_tax = 16;
+   */
+  consumptionTax?: number;
+
+  /**
    * @generated from field: optional api.v1.Error error = 20;
    */
   error?: Error;
+
+  /**
+   * External refund identifier (rfd-*) for refund/refund-failed webhooks.
+   *
+   * @generated from field: optional string refund_id = 21;
+   */
+  refundId?: string;
+
+  /**
+   * Refund details, present on refund and refund_failed events.
+   *
+   * @generated from field: optional api.v1.RefundInfo refund = 22;
+   */
+  refund?: RefundInfo;
 };
 
 /**
@@ -346,21 +402,29 @@ export type ChargeMessageJson = {
   merchantName?: string;
 
   /**
+   * Original charge amount before discount and before any refund is applied.
+   *
    * @generated from field: int32 initial_amount = 6;
    */
   initialAmount?: number;
 
   /**
+   * Discount amount deducted from the original charge amount.
+   *
    * @generated from field: int32 discount = 7;
    */
   discount?: number;
 
   /**
+   * Final charge amount after discount, before any refund is applied.
+   *
    * @generated from field: int32 final_amount = 8;
    */
   finalAmount?: number;
 
   /**
+   * Total amount refunded for this charge when the charge has been refunded.
+   *
    * @generated from field: optional int32 amount_refunded = 9;
    */
   amountRefunded?: number;
@@ -371,9 +435,18 @@ export type ChargeMessageJson = {
   currency?: string;
 
   /**
+   * Timestamp when the charge or refund outcome was completed.
+   *
    * @generated from field: optional string processed_at = 11;
    */
   processedAt?: string;
+
+  /**
+   * Jamm fee associated with this refund event (refund uses refund fee; cancel uses 0).
+   *
+   * @generated from field: optional int32 jamm_fee = 12;
+   */
+  jammFee?: number;
 
   /**
    * @generated from field: string created_at = 13;
@@ -386,9 +459,38 @@ export type ChargeMessageJson = {
   updatedAt?: string;
 
   /**
+   * Whether the original transaction's Jamm fee was waived (same-day cancel) or not (refund).
+   * Values: "waived", "not_waived".
+   *
+   * @generated from field: optional string original_transaction_jamm_fee = 15;
+   */
+  originalTransactionJammFee?: string;
+
+  /**
+   * Consumption tax (10% of the Jamm fee).
+   *
+   * @generated from field: optional int32 consumption_tax = 16;
+   */
+  consumptionTax?: number;
+
+  /**
    * @generated from field: optional api.v1.Error error = 20;
    */
   error?: ErrorJson;
+
+  /**
+   * External refund identifier (rfd-*) for refund/refund-failed webhooks.
+   *
+   * @generated from field: optional string refund_id = 21;
+   */
+  refundId?: string;
+
+  /**
+   * Refund details, present on refund and refund_failed events.
+   *
+   * @generated from field: optional api.v1.RefundInfo refund = 22;
+   */
+  refund?: RefundInfoJson;
 };
 
 /**
@@ -431,18 +533,142 @@ export enum ChargeMessage_Status {
    * @generated from enum value: STATUS_CANCELLED = 5;
    */
   CANCELLED = 5,
+
+  /**
+   * @generated from enum value: STATUS_REFUNDED = 6;
+   */
+  REFUNDED = 6,
 }
 
 /**
  * @generated from enum api.v1.ChargeMessage.Status
  */
-export type ChargeMessage_StatusJson = "STATUS_UNSPECIFIED" | "STATUS_SUCCESS" | "STATUS_FAILURE" | "STATUS_WAITING_EKYC" | "STATUS_BLOCKING" | "STATUS_CANCELLED";
+export type ChargeMessage_StatusJson = "STATUS_UNSPECIFIED" | "STATUS_SUCCESS" | "STATUS_FAILURE" | "STATUS_WAITING_EKYC" | "STATUS_BLOCKING" | "STATUS_CANCELLED" | "STATUS_REFUNDED";
 
 /**
  * Describes the enum api.v1.ChargeMessage.Status.
  */
 export const ChargeMessage_StatusSchema: GenEnum<ChargeMessage_Status, ChargeMessage_StatusJson> = /*@__PURE__*/
   enumDesc(file_api_v1_merchant_webhooks, 5, 0);
+
+/**
+ * RefundInfo contains refund-specific details for refund and refund_failed webhook events.
+ *
+ * @generated from message api.v1.RefundInfo
+ */
+export type RefundInfo = Message<"api.v1.RefundInfo"> & {
+  /**
+   * External refund identifier (rfd-*).
+   *
+   * @generated from field: optional string refund_id = 1;
+   */
+  refundId?: string;
+
+  /**
+   * Amount refunded for this event.
+   *
+   * @generated from field: optional int32 amount_refunded = 2;
+   */
+  amountRefunded?: number;
+
+  /**
+   * Jamm fee for this refund event.
+   *
+   * @generated from field: optional int32 jamm_fee = 3;
+   */
+  jammFee?: number;
+
+  /**
+   * Consumption tax (10% of the Jamm fee).
+   *
+   * @generated from field: optional int32 consumption_tax = 4;
+   */
+  consumptionTax?: number;
+
+  /**
+   * Whether the original transaction's Jamm fee was waived (true for same-day cancel).
+   *
+   * @generated from field: optional bool original_transaction_fee_waived = 5;
+   */
+  originalTransactionFeeWaived?: boolean;
+
+  /**
+   * Error details, present only on refund_failed events.
+   *
+   * @generated from field: optional api.v1.Error error = 6;
+   */
+  error?: Error;
+
+  /**
+   * When the refund was processed (not present on refund_failed events).
+   *
+   * @generated from field: optional string processed_at = 7;
+   */
+  processedAt?: string;
+};
+
+/**
+ * RefundInfo contains refund-specific details for refund and refund_failed webhook events.
+ *
+ * @generated from message api.v1.RefundInfo
+ */
+export type RefundInfoJson = {
+  /**
+   * External refund identifier (rfd-*).
+   *
+   * @generated from field: optional string refund_id = 1;
+   */
+  refundId?: string;
+
+  /**
+   * Amount refunded for this event.
+   *
+   * @generated from field: optional int32 amount_refunded = 2;
+   */
+  amountRefunded?: number;
+
+  /**
+   * Jamm fee for this refund event.
+   *
+   * @generated from field: optional int32 jamm_fee = 3;
+   */
+  jammFee?: number;
+
+  /**
+   * Consumption tax (10% of the Jamm fee).
+   *
+   * @generated from field: optional int32 consumption_tax = 4;
+   */
+  consumptionTax?: number;
+
+  /**
+   * Whether the original transaction's Jamm fee was waived (true for same-day cancel).
+   *
+   * @generated from field: optional bool original_transaction_fee_waived = 5;
+   */
+  originalTransactionFeeWaived?: boolean;
+
+  /**
+   * Error details, present only on refund_failed events.
+   *
+   * @generated from field: optional api.v1.Error error = 6;
+   */
+  error?: ErrorJson;
+
+  /**
+   * When the refund was processed (not present on refund_failed events).
+   *
+   * @generated from field: optional string processed_at = 7;
+   */
+  processedAt?: string;
+};
+
+/**
+ * Describes the message api.v1.RefundInfo.
+ * Use `create(RefundInfoSchema)` to create a new message.
+ */
+export const RefundInfoSchema: GenMessage<RefundInfo, RefundInfoJson> = /*@__PURE__*/
+  messageDesc(file_api_v1_merchant_webhooks, 6);
 
 /**
  * @generated from message api.v1.ContractMessage
@@ -499,7 +725,7 @@ export type ContractMessageJson = {
  * Use `create(ContractMessageSchema)` to create a new message.
  */
 export const ContractMessageSchema: GenMessage<ContractMessage, ContractMessageJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_merchant_webhooks, 6);
+  messageDesc(file_api_v1_merchant_webhooks, 7);
 
 /**
  * UserAccountMessage contains information about a user account operation.
@@ -560,7 +786,7 @@ export type UserAccountMessageJson = {
  * Use `create(UserAccountMessageSchema)` to create a new message.
  */
 export const UserAccountMessageSchema: GenMessage<UserAccountMessage, UserAccountMessageJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_merchant_webhooks, 7);
+  messageDesc(file_api_v1_merchant_webhooks, 8);
 
 /**
  * Generic error type.
@@ -623,7 +849,7 @@ export type ErrorJson = {
  * Use `create(ErrorSchema)` to create a new message.
  */
 export const ErrorSchema: GenMessage<Error, ErrorJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_merchant_webhooks, 8);
+  messageDesc(file_api_v1_merchant_webhooks, 9);
 
 /**
  * @generated from message api.v1.ErrorDetail
@@ -688,7 +914,7 @@ export type ErrorDetailJson = {
  * Use `create(ErrorDetailSchema)` to create a new message.
  */
 export const ErrorDetailSchema: GenMessage<ErrorDetail, ErrorDetailJson> = /*@__PURE__*/
-  messageDesc(file_api_v1_merchant_webhooks, 9);
+  messageDesc(file_api_v1_merchant_webhooks, 10);
 
 /**
  * EventType defines the webhook events that Jamm sends to merchant endpoints.
@@ -743,13 +969,21 @@ export enum EventType {
   CHARGE_FAIL = 6,
 
   /**
-   * Fired when a charge is canceled by the merchant.
-   * Payload contains the canceled charge details.
-   * Merchants should update their records to reflect the cancellation.
+   * Fired when a charge is successfully refunded.
+   * Payload contains the refunded charge details.
+   * Merchants should update their records to reflect the refund.
    *
-   * @generated from enum value: EVENT_TYPE_CHARGE_CANCEL = 7;
+   * @generated from enum value: EVENT_TYPE_REFUND_SUCCEEDED = 7;
    */
-  CHARGE_CANCEL = 7,
+  REFUND_SUCCEEDED = 7,
+
+  /**
+   * Fired when a refund request fails or is denied.
+   * Payload contains the charge details with error information including the failure reason.
+   *
+   * @generated from enum value: EVENT_TYPE_REFUND_FAILED = 8;
+   */
+  REFUND_FAILED = 8,
 
   /**
    * Fired when a contract is activated.
@@ -783,7 +1017,7 @@ export enum EventType {
  *
  * @generated from enum api.v1.EventType
  */
-export type EventTypeJson = "EVENT_TYPE_UNSPECIFIED" | "EVENT_TYPE_CHARGE_CREATED" | "EVENT_TYPE_CHARGE_UPDATED" | "EVENT_TYPE_CHARGE_SUCCESS" | "EVENT_TYPE_CHARGE_FAIL" | "EVENT_TYPE_CHARGE_CANCEL" | "EVENT_TYPE_CONTRACT_ACTIVATED" | "EVENT_TYPE_USER_ACCOUNT_DELETED" | "EVENT_TYPE_TESTING";
+export type EventTypeJson = "EVENT_TYPE_UNSPECIFIED" | "EVENT_TYPE_CHARGE_CREATED" | "EVENT_TYPE_CHARGE_UPDATED" | "EVENT_TYPE_CHARGE_SUCCESS" | "EVENT_TYPE_CHARGE_FAIL" | "EVENT_TYPE_REFUND_SUCCEEDED" | "EVENT_TYPE_REFUND_FAILED" | "EVENT_TYPE_CONTRACT_ACTIVATED" | "EVENT_TYPE_USER_ACCOUNT_DELETED" | "EVENT_TYPE_TESTING";
 
 /**
  * Describes the enum api.v1.EventType.

@@ -1,4 +1,9 @@
 /**
+ * Platform mode options for API calls on behalf of a specific merchant.
+ */
+export type PlatformOptions = { merchant?: string };
+
+/**
  * Remove $typeName from protobuf oriented types.
  */
 export type DeepOmit<T, K extends PropertyKey> = T extends object
