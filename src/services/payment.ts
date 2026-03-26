@@ -1,8 +1,8 @@
 import { createClient, ConnectError, Code, type Transport } from "@connectrpc/connect";
 
 import transport from "../lib/transport";
-import { GetChargeRequestSchema, GetChargeResponseSchema, GetChargesRequestSchema, GetChargesResponseSchema, OffSessionPaymentRequestSchema, OffSessionPaymentResponseSchema, OnSessionPaymentRequestSchema, OnSessionPaymentResponseSchema, PaymentService } from "../lib/proto/api/v1/payment_pb";
-import type { OnSessionPaymentResponseJson, OffSessionPaymentResponseJson, GetChargeResponseJson, GetChargesResponseJson, OnSessionPaymentRequestJson, OffSessionPaymentRequestJson, GetChargesRequestJson } from "../lib/proto/api/v1/payment_pb";
+import { GetChargeRequestSchema, GetChargeResponseSchema, GetChargesRequestSchema, GetChargesResponseSchema, OffSessionPaymentRequestSchema, OffSessionPaymentResponseSchema, OnSessionPaymentRequestSchema, OnSessionPaymentResponseSchema, RefundRequestSchema, RefundResponseSchema, PaymentService } from "../lib/proto/api/v1/payment_pb";
+import type { OnSessionPaymentResponseJson, OffSessionPaymentResponseJson, GetChargeResponseJson, GetChargesResponseJson, OnSessionPaymentRequestJson, OffSessionPaymentRequestJson, GetChargesRequestJson, RefundRequestJson, RefundResponseJson } from "../lib/proto/api/v1/payment_pb";
 import { fromJson, toJson } from "@bufbuild/protobuf";
 import type { PlatformOptions } from "../types";
 
@@ -18,6 +18,7 @@ export function injectTransport(transportFn: (_merchant?: string) => Transport):
 export type OnSessionPaymentInput = OnSessionPaymentRequestJson & { merchant?: string };
 export type OffSessionPaymentInput = OffSessionPaymentRequestJson & { merchant?: string };
 export type GetChargesInput = GetChargesRequestJson & { merchant?: string };
+export type RefundInput = RefundRequestJson & { chargeId: string; merchant?: string };
 
 export default {
     /**
@@ -198,5 +199,48 @@ export default {
         const got = await createClient(PaymentService, _transport(merchant)).getCharges(req);
 
         return toJson(GetChargesResponseSchema, got);
-    }
+    },
+
+    /**
+     * Refund a charge.
+     *
+     * The refund is always processed asynchronously. The final result is
+     * delivered via webhook (`refund_succeeded` or `refund_failed`).
+     *
+     * ## Merchant mode
+     *
+     * @example
+     * ```
+     * // Full refund
+     * jamm.payment.refund({ chargeId: "trx-12345" })
+     *
+     * // Partial refund
+     * jamm.payment.refund({ chargeId: "trx-12345", amount: 500 })
+     *
+     * // Cancel only (no bank transfer fallback)
+     * jamm.payment.refund({ chargeId: "trx-12345", cancelOnly: true })
+     * ```
+     *
+     * ## Platform mode
+     *
+     * The merchant field allows refunding charges on behalf of a specific merchant.
+     *
+     * @example
+     * ```
+     * jamm.payment.refund({
+     *   chargeId: "trx-12345",
+     *   merchant: "mer-merchant-123"
+     * })
+     * ```
+     *
+     * @param input - Refund request (with optional merchant for platform mode)
+     * @returns Response containing charge ID and refund ID
+     */
+    refund: async (input: RefundInput): Promise<RefundResponseJson> => {
+        const { merchant, ...apiInput } = input;
+        const req = fromJson(RefundRequestSchema, apiInput);
+        const got = await createClient(PaymentService, _transport(merchant)).refund(req);
+
+        return toJson(RefundResponseSchema, got);
+    },
 };

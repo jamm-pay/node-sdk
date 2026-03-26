@@ -37,6 +37,7 @@ export type {
     OnSessionPaymentInput,
     OffSessionPaymentInput,
     GetChargesInput,
+    RefundInput,
 } from "./services/payment";
 
 export type {
