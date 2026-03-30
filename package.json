@@ -33,13 +33,13 @@
     "@types/node": "^22.14.1",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
-    "@vitest/coverage-v8": "^3.1.2",
+    "@vitest/coverage-v8": "^4.1.1",
     "eslint": "^9.25.1",
     "eslint-plugin-no-console-log": "^1.0.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.1",
-    "vitest": "^3.1.2"
+    "vitest": "^4.1.1"
   }
 }
