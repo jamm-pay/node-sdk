@@ -28,7 +28,7 @@
   "devDependencies": {
     "@eslint/js": "^9.25.1",
     "@faker-js/faker": "^9.9.0",
-    "@microsoft/api-extractor": "^7.52.6",
+    "@microsoft/api-extractor": "7.58.0",
     "@types/faker": "^6.6.8",
     "@types/node": "^22.14.1",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
