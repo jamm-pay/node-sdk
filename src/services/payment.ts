@@ -1,8 +1,9 @@
 import { createClient, ConnectError, Code, type Transport } from "@connectrpc/connect";
+import { randomUUID } from "node:crypto";
 
 import transport from "../lib/transport";
-import { GetChargeRequestSchema, GetChargeResponseSchema, GetChargesRequestSchema, GetChargesResponseSchema, OffSessionPaymentRequestSchema, OffSessionPaymentResponseSchema, OnSessionPaymentRequestSchema, OnSessionPaymentResponseSchema, RefundRequestSchema, RefundResponseSchema, PaymentService } from "../lib/proto/api/v1/payment_pb";
-import type { OnSessionPaymentResponseJson, OffSessionPaymentResponseJson, GetChargeResponseJson, GetChargesResponseJson, OnSessionPaymentRequestJson, OffSessionPaymentRequestJson, GetChargesRequestJson, RefundRequestJson, RefundResponseJson } from "../lib/proto/api/v1/payment_pb";
+import { GetChargeRequestSchema, GetChargeResponseSchema, GetChargesRequestSchema, GetChargesResponseSchema, OffSessionPaymentAsyncRequestSchema, OffSessionPaymentAsyncResponseSchema, OffSessionPaymentRequestSchema, OffSessionPaymentResponseSchema, OnSessionPaymentRequestSchema, OnSessionPaymentResponseSchema, RefundRequestSchema, RefundResponseSchema, PaymentService } from "../lib/proto/api/v1/payment_pb";
+import type { OnSessionPaymentResponseJson, OffSessionPaymentAsyncRequestJson, OffSessionPaymentAsyncResponseJson, OffSessionPaymentResponseJson, GetChargeResponseJson, GetChargesResponseJson, OnSessionPaymentRequestJson, OffSessionPaymentRequestJson, GetChargesRequestJson, RefundRequestJson, RefundResponseJson } from "../lib/proto/api/v1/payment_pb";
 import { fromJson, toJson } from "@bufbuild/protobuf";
 import type { PlatformOptions } from "../types";
 
@@ -17,6 +18,7 @@ export function injectTransport(transportFn: (_merchant?: string) => Transport):
 // Input types with platform mode support
 export type OnSessionPaymentInput = OnSessionPaymentRequestJson & { merchant?: string };
 export type OffSessionPaymentInput = OffSessionPaymentRequestJson & { merchant?: string };
+export type OffSessionPaymentAsyncInput = OffSessionPaymentAsyncRequestJson & { merchant?: string };
 export type GetChargesInput = GetChargesRequestJson & { merchant?: string };
 export type RefundInput = RefundRequestJson & { chargeId: string; merchant?: string };
 
@@ -124,6 +126,65 @@ export default {
         const got =  await createClient(PaymentService, _transport(merchant)).offSessionPayment(req);
 
         return toJson(OffSessionPaymentResponseSchema, got);
+    },
+
+    /**
+     * Off Session Payment (Async)
+     *
+     * Initiates an asynchronous off-session charge. The server returns immediately
+     * with a charge ID, then settles the payment in the background. Use
+     * `getCharge(chargeId)` to poll for the final result.
+     *
+     * Auto-fills `idempotencyKey` with a UUID when the caller does not supply one,
+     * so every async charge is retry-safe by default. A caller-supplied key is
+     * left untouched so explicit retries reuse the same value and the server
+     * returns the original charge instead of creating a duplicate.
+     *
+     * ## Merchant mode
+     *
+     * @example
+     * ```
+     * jamm.payment.offSessionPaymentAsync({
+     *   customer: "cus-12345",
+     *   charge: {
+     *     price: 1000,
+     *     description: "Product purchase",
+     *     metadata: {},
+     *   },
+     *   idempotencyKey: "order-2026-001",
+     * })
+     * ```
+     *
+     * ## Platform mode
+     *
+     * @example
+     * ```
+     * jamm.payment.offSessionPaymentAsync({
+     *   customer: "cus-12345",
+     *   charge: { price: 1000, description: "Product purchase", metadata: {} },
+     *   merchant: "mer-merchant-123"
+     * })
+     * ```
+     *
+     * @param input - Async payment charge request (with optional merchant for platform mode)
+     * @returns Response containing request ID, status, and charge ID for polling
+     */
+    offSessionPaymentAsync: async (input: OffSessionPaymentAsyncInput): Promise<OffSessionPaymentAsyncResponseJson> => {
+        const { merchant, ...apiInput } = input;
+        const idempotencyKey = apiInput.idempotencyKey;
+
+        // Treat undefined, empty, whitespace-only, or non-string values as "not
+        // supplied" and auto-fill a UUID so every async charge is retry-safe by
+        // default. Matches Java's isBlank() and Ruby's nil?/strip.empty? behavior.
+        const isBlank = typeof idempotencyKey !== "string" || idempotencyKey.trim() === "";
+        const normalized: OffSessionPaymentAsyncRequestJson = {
+            ...apiInput,
+            idempotencyKey: isBlank ? randomUUID() : idempotencyKey,
+        };
+        const req = fromJson(OffSessionPaymentAsyncRequestSchema, normalized);
+        const got = await createClient(PaymentService, _transport(merchant)).offSessionPaymentAsync(req);
+
+        return toJson(OffSessionPaymentAsyncResponseSchema, got);
     },
 
     /**
