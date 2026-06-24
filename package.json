@@ -3,7 +3,7 @@
   "description": "Jamm SDK",
   "author": "Jamm <support@jamm-pay.jp> (https://jamm-pay.jp)",
   "license": "MIT",
-  "version": "0.8.0",
+  "version": "0.0.0",
   "type": "module",
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -28,8 +28,7 @@
   "devDependencies": {
     "@eslint/js": "^9.25.1",
     "@faker-js/faker": "^9.9.0",
-    "@microsoft/api-extractor": "7.58.1",
-    "@types/faker": "^6.6.8",
+    "@microsoft/api-extractor": "7.58.7",
     "@types/node": "^22.14.1",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",

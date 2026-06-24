@@ -24,6 +24,45 @@ export {
 import config from "../lib/config";
 import types from "./types";
 
+// Forward-compatibility: the Jamm backend may add new protobuf fields to webhook
+// payloads at any time. Without this, protobuf-es `fromJson` throws on the first
+// unknown key (e.g. `cannot decode message api.v1.ChargeMessage from JSON: key
+// "..." is unknown`), crashing merchants pinned to an older SDK. Ignoring unknown
+// fields keeps parsing forward-compatible.
+const jsonOptions = { ignoreUnknownFields: true } as const;
+
+/**
+ * Refund webhooks (REFUND_SUCCEEDED / REFUND_FAILED) deliver `content` as a
+ * nested `{ transaction, refund }` wrapper instead of a flat ChargeMessage.
+ * Flatten it back into a ChargeMessage so callers always receive the same shape.
+ */
+function flattenChargeContent(
+    content: Record<string, unknown>,
+): ChargeMessageJson {
+    if (content && typeof content.transaction === "object" && content.transaction !== null) {
+        const { transaction, refund } = content as {
+            transaction: ChargeMessageJson;
+            refund?: { id?: string } | null;
+        };
+
+        if (refund === undefined || refund === null) {
+            return transaction;
+        }
+
+        const flattened = { ...transaction, refund } as ChargeMessageJson;
+
+        // Surface the rfd- id on the flat refundId attribute too, matching the
+        // Ruby/PHP SDKs and the field the proto documents for refund webhooks.
+        if (typeof refund === "object" && typeof refund.id === "string") {
+            flattened.refundId = refund.id;
+        }
+
+        return flattened;
+    }
+
+    return content as ChargeMessageJson;
+}
+
 const parseInputSchema = z.object({
     // Arbitrary JSON data arrived from the webhook.
     data: z.record(z.unknown()),
@@ -68,15 +107,25 @@ export default {
             deep: true,
         });
 
-        const content = message.content as MerchantWebhookMessageJson;
+        const content = message.content as Record<string, unknown>;
 
         // Remove content property before validation
         // google.protobuf.Any requires @type field which is absent in webhook data
         delete message.content;
 
+        // Every supported event carries a content payload. Fail fast with a clear
+        // message instead of letting `fromJson` throw an opaque "cannot decode ...
+        // from JSON: null" further down.
+        if (content === undefined || content === null) {
+            throw new Error(
+                `Webhook payload is missing content (event type: ${message.eventType})`,
+            );
+        }
+
         const event = fromJson(
             MerchantWebhookMessageSchema,
             message as MerchantWebhookMessageJson,
+            jsonOptions,
         );
 
         // Route to appropriate message type based on event type
@@ -91,12 +140,20 @@ export default {
                 types.EventType.CHARGE_SUCCESS,
             ].includes(event.eventType)
         ) {
-            return fromJson(ChargeMessageSchema, content as ChargeMessageJson);
+            return fromJson(
+                ChargeMessageSchema,
+                flattenChargeContent(content),
+                jsonOptions,
+            );
         }
 
         // Contract-related events
         if ([types.EventType.CONTRACT_ACTIVATED].includes(event.eventType)) {
-            return fromJson(ContractMessageSchema, content as ContractMessageJson);
+            return fromJson(
+                ContractMessageSchema,
+                content as ContractMessageJson,
+                jsonOptions,
+            );
         }
 
         // User account-related events
@@ -104,6 +161,7 @@ export default {
             return fromJson(
                 UserAccountMessageSchema,
                 content as UserAccountMessageJson,
+                jsonOptions,
             );
         }
 
