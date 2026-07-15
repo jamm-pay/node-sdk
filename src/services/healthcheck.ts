@@ -4,10 +4,8 @@ import transport from "../lib/transport";
 import { HealthcheckService, type PingResponseJson, PingResponseSchema } from "../lib/proto/api/v1/healthcheck_pb";
 import { toJson } from "@bufbuild/protobuf";
 
-// eslint-disable-next-line no-unused-vars
 let _transport: (_merchant?: string) => Transport = transport;
 
-// eslint-disable-next-line no-unused-vars
 export function injectTransport(transportFn: (_merchant?: string) => Transport): void {
     _transport = transportFn;
 }

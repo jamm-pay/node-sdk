@@ -7,10 +7,8 @@ import type { OnSessionPaymentResponseJson, OffSessionPaymentAsyncRequestJson, O
 import { fromJson, toJson } from "@bufbuild/protobuf";
 import type { PlatformOptions } from "../types";
 
-// eslint-disable-next-line no-unused-vars
 let _transport: (_merchant?: string) => Transport = transport;
 
-// eslint-disable-next-line no-unused-vars
 export function injectTransport(transportFn: (_merchant?: string) => Transport): void {
     _transport = transportFn;
 }

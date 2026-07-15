@@ -5,19 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.9.0] - 2026-06-24
+## [0.10.0] - 2026-07-14
+
+### Changed
+
+- `expiresAt` on off-session and contract requests now accepts up to 31 days ahead (was 30 days).
+
+## [0.9.0] - 2026-07-03
 
 ### Added
 
-- Surface `api_source` on charge and refund webhooks, resolved from the numeric wire value to its `ChargeMessage_ApiSource` enum
-- Re-export the `ChargeMessage_ApiSource` enum
-- Surface the refund `rfd-` id on the flat `refundId` attribute in addition to the nested `refund.id`
-
-### Fixed
-
-- Webhook parsing no longer fails on new fields added by the backend (forward-compatible)
-- Refund webhooks now expose the nested transaction fields and the refund's `rfd-` id (`refund.id`)
-- `webhook.parse` now raises a clear error when a webhook payload is missing its `content`
+- Added `webhook.verifyAndParse(rawBody)` — verifies the HMAC signature over the exact received `content` bytes and parses in one step. Unlike `webhook.verify`, it is not broken by JSON re-serialization (correctly handles `&`, `<`, `>` in content) and rejects bodies with duplicate top-level keys.
 
 ## [0.8.0] - 2026-05-20
 
