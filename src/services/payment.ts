@@ -66,6 +66,23 @@ export default {
      * })
      * ```
      *
+     * ## Retries
+     *
+     * Pass `idempotencyKey` to make a retry safe: the same `(merchant, key)` returns the
+     * original payment link, the same key with different parameters is rejected, and no key
+     * means a new session on every call. ASCII `^[a-zA-Z0-9_-]{1,255}$`. Unlike
+     * `offSessionPaymentAsync` the SDK does not fill one in — a generated key would be new on
+     * each call and buy no idempotency.
+     *
+     * @example
+     * ```
+     * jamm.payment.onSessionPayment({
+     *   customer: "cus-12345",
+     *   charge: { price: 1000, description: "Product purchase" },
+     *   idempotencyKey: "order-2026-001",
+     * })
+     * ```
+     *
      * @param input - Payment session creation request (with optional merchant for platform mode)
      * @returns Response containing payment session details
      */

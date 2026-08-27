@@ -52,13 +52,54 @@ class InvalidSignatureError extends Error {
     }
 }
 
+// Ignore fields the backend may add in the future so parsing stays
+// forward-compatible instead of throwing on unknown keys.
+const jsonOptions = { ignoreUnknownFields: true } as const;
+
+// Refund/cancel webhooks arrive as a nested `{ transaction, refund }` wrapper
+// rather than a flat ChargeMessage. Flatten the transaction fields onto the
+// message and surface the refund `rfd-` id on the flat `refundId` attribute,
+// matching the Ruby/PHP SDKs and the field the proto documents for refunds.
+function flattenChargeContent(
+    content: Record<string, unknown>,
+): ChargeMessageJson {
+    if (
+        content &&
+        typeof content.transaction === "object" &&
+        content.transaction !== null
+    ) {
+        const { transaction, refund } = content as {
+            transaction: ChargeMessageJson;
+            refund?: { id?: string } | null;
+        };
+
+        if (refund === undefined || refund === null) {
+            return transaction;
+        }
+
+        const flattened = { ...transaction, refund } as ChargeMessageJson;
+
+        if (typeof refund === "object" && typeof refund.id === "string") {
+            flattened.refundId = refund.id;
+        }
+
+        return flattened;
+    }
+
+    return content as ChargeMessageJson;
+}
+
 function parseMessage(input: ParseInput): ParseOutput {
     parseInputSchema.parse(input);
 
     // Convert snake_case keys to camelCase for JavaScript conventions
-    // Webhook data arrives from Jamm backend in snake_case format
+    // Webhook data arrives from Jamm backend in snake_case format.
+    // metadata is the merchant's own map, echoed back verbatim -- its keys are data,
+    // not protocol field names, so camelCasing them would corrupt them (order_id ->
+    // orderId). Refund events nest the charge under `transaction`, hence both paths.
     const message = camelcaseKeys(input.data, {
         deep: true,
+        stopPaths: ["content.metadata", "content.transaction.metadata"],
     });
 
     const content = message.content as MerchantWebhookMessageJson;
@@ -67,9 +108,18 @@ function parseMessage(input: ParseInput): ParseOutput {
     // google.protobuf.Any requires @type field which is absent in webhook data
     delete message.content;
 
+    // Every supported event carries a content payload; fail with a clear message
+    // instead of protobuf-es's "cannot decode ... from JSON: undefined".
+    if (content === undefined || content === null) {
+        throw new Error(
+            `Webhook payload is missing content (event type: ${message.eventType})`,
+        );
+    }
+
     const event = fromJson(
         MerchantWebhookMessageSchema,
         message as MerchantWebhookMessageJson,
+        jsonOptions,
     );
 
     // Route to appropriate message type based on event type
@@ -84,12 +134,20 @@ function parseMessage(input: ParseInput): ParseOutput {
             types.EventType.CHARGE_SUCCESS,
         ].includes(event.eventType)
     ) {
-        return fromJson(ChargeMessageSchema, content as ChargeMessageJson);
+        return fromJson(
+            ChargeMessageSchema,
+            flattenChargeContent(content as Record<string, unknown>),
+            jsonOptions,
+        );
     }
 
     // Contract-related events
     if ([types.EventType.CONTRACT_ACTIVATED].includes(event.eventType)) {
-        return fromJson(ContractMessageSchema, content as ContractMessageJson);
+        return fromJson(
+            ContractMessageSchema,
+            content as ContractMessageJson,
+            jsonOptions,
+        );
     }
 
     // User account-related events
@@ -97,6 +155,7 @@ function parseMessage(input: ParseInput): ParseOutput {
         return fromJson(
             UserAccountMessageSchema,
             content as UserAccountMessageJson,
+            jsonOptions,
         );
     }
 

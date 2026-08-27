@@ -1,6 +1,6 @@
 import { createClient, ConnectError, Code, type Transport } from "@connectrpc/connect";
 
-import { CreateCustomerRequestSchema, CustomerService, DeleteCustomerRequestSchema, DeleteCustomerResponseJson, DeleteCustomerResponseSchema, GetCustomerRequestSchema, type UpdateCustomerRequestJson } from "../lib/proto/api/v1/customer_pb";
+import { CreateCustomerRequestSchema, CustomerService, DeleteCustomerRequestSchema, DeleteCustomerResponseJson, DeleteCustomerResponseSchema, GetContractRequestSchema, GetContractResponseJson, GetContractResponseSchema, GetCustomerRequestSchema, type UpdateCustomerRequestJson } from "../lib/proto/api/v1/customer_pb";
 import { CustomerSchema } from "../lib/proto/api/v1/common_pb";
 import type { BuyerJson, CustomerJson } from "../lib/proto/api/v1/common_pb";
 import transport from "../lib/transport";
@@ -111,6 +111,54 @@ export default {
             return toJson(CustomerSchema, got.customer);
         } catch (error) {
             if (error instanceof ConnectError && [Code.NotFound, Code.InvalidArgument, Code.PermissionDenied].includes(error.code)) {
+                return null;
+            }
+            throw error;
+        }
+    },
+
+    /**
+     * Get the active contract belonging to a customer.
+     *
+     * Returns null when there is no *active* contract — none was ever approved, one is
+     * still pending approval or was cancelled, the id is unknown, or it belongs to another
+     * merchant (the API reports that as an identical not-found on purpose, so a `cus-` id
+     * cannot be probed across merchants).
+     *
+     * ## Merchant mode
+     *
+     * @example
+     * ```
+     * jamm.customer.getContract("cus-12345")
+     * ```
+     *
+     * ## Platform mode
+     *
+     * @example
+     * ```
+     * jamm.customer.getContract("cus-12345", { merchant: "mer-merchant-123" })
+     * ```
+     *
+     * @param id - Customer ID (must start with `cus-`; an email is rejected by the API)
+     * @param options - Optional platform options (merchant for platform mode)
+     * @returns The customer and its active contract, or null — see above for what null covers
+     */
+    getContract: async (id: string, options?: PlatformOptions): Promise<GetContractResponseJson | null> => {
+        try {
+            const merchant = options?.merchant;
+            const req = fromJson(GetContractRequestSchema, {
+                customer: id,
+            });
+
+            const got = await createClient(CustomerService, _transport(merchant)).getContract(req);
+
+            if (!got.contract) {
+                return null;
+            }
+
+            return toJson(GetContractResponseSchema, got);
+        } catch (error) {
+            if (error instanceof ConnectError && error.code === Code.NotFound) {
                 return null;
             }
             throw error;

@@ -8,7 +8,7 @@
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "engines": {
-    "node": ">=18.*"
+    "node": "20 || >=22"
   },
   "scripts": {
     "build": "tsc && mkdir -p report && api-extractor run --local",
