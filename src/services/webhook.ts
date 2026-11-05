@@ -1,5 +1,4 @@
 import * as crypto from "crypto";
-import camelcaseKeys from "camelcase-keys";
 import { z } from "zod";
 import { fromJson } from "@bufbuild/protobuf";
 import {
@@ -26,7 +25,7 @@ import types from "./types";
 
 const parseInputSchema = z.object({
     // Arbitrary JSON data arrived from the webhook.
-    data: z.record(z.unknown()),
+    data: z.record(z.string(), z.unknown()),
 });
 
 type ParseInput = z.infer<typeof parseInputSchema>;
@@ -37,7 +36,7 @@ type ParseOutput =
 
 const verifyInputSchema = z.object({
     // Arbitrary JSON data arrived from the webhook.
-    data: z.record(z.unknown()),
+    data: z.record(z.string(), z.unknown()),
 
     // Webhook signature header value, in the form "sha256=<hex_digest>"
     signature: z.string(),
@@ -89,38 +88,58 @@ function flattenChargeContent(
     return content as ChargeMessageJson;
 }
 
+/**
+ * Picks the envelope fields out of a raw webhook object by the exact names the proto
+ * declares (proto name or JSON name); nothing else on the envelope is touched.
+ *
+ * `content` is the key the signature covers, so no alias (`Content`) may stand in for
+ * it, and unknown keys never reach the key normalizer. Driven by the schema so a new
+ * envelope field needs no change here.
+ *
+ * @param data - The parsed webhook body
+ * @returns The envelope without `content`, keyed by JSON name
+ * @throws {Error} If a field is present under both its proto and JSON name
+ */
+function selectEnvelope(data: Record<string, unknown>): MerchantWebhookMessageJson {
+    const envelope: Record<string, unknown> = {};
+    for (const field of MerchantWebhookMessageSchema.fields) {
+        const hasName = Object.hasOwn(data, field.name);
+        const hasJsonName = field.jsonName !== field.name && Object.hasOwn(data, field.jsonName);
+        if (hasName && hasJsonName) {
+            throw new Error(`Webhook envelope sets both ${field.name} and ${field.jsonName}`);
+        }
+        // google.protobuf.Any requires @type, absent in webhook data; content is decoded separately.
+        if (field.localName === "content" || !(hasName || hasJsonName)) {
+            continue;
+        }
+        envelope[field.jsonName] = data[hasName ? field.name : field.jsonName];
+    }
+    return envelope as MerchantWebhookMessageJson;
+}
+
 function parseMessage(input: ParseInput): ParseOutput {
     parseInputSchema.parse(input);
 
-    // Convert snake_case keys to camelCase for JavaScript conventions
-    // Webhook data arrives from Jamm backend in snake_case format.
-    // metadata is the merchant's own map, echoed back verbatim -- its keys are data,
-    // not protocol field names, so camelCasing them would corrupt them (order_id ->
-    // orderId). Refund events nest the charge under `transaction`, hence both paths.
-    const message = camelcaseKeys(input.data, {
-        deep: true,
-        stopPaths: ["content.metadata", "content.transaction.metadata"],
-    });
-
-    const content = message.content as MerchantWebhookMessageJson;
-
-    // Remove content property before validation
-    // google.protobuf.Any requires @type field which is absent in webhook data
-    delete message.content;
+    const envelope = selectEnvelope(input.data);
+    const rawContent = input.data.content;
 
     // Every supported event carries a content payload; fail with a clear message
     // instead of protobuf-es's "cannot decode ... from JSON: undefined".
-    if (content === undefined || content === null) {
+    if (rawContent === undefined || rawContent === null) {
         throw new Error(
-            `Webhook payload is missing content (event type: ${message.eventType})`,
+            `Webhook payload is missing content (event type: ${envelope.eventType})`,
         );
     }
+    if (typeof rawContent !== "object" || Array.isArray(rawContent)) {
+        throw new Error("Webhook content must be a JSON object");
+    }
 
-    const event = fromJson(
-        MerchantWebhookMessageSchema,
-        message as MerchantWebhookMessageJson,
-        jsonOptions,
-    );
+    const event = fromJson(MerchantWebhookMessageSchema, envelope, jsonOptions);
+
+    // protobuf-es accepts both the proto field name (merchant_name) and the JSON name
+    // (merchantName) at every depth and leaves map keys such as metadata untouched, so
+    // the content needs no key normalization before decoding.
+    const content = rawContent as Record<string, unknown>;
 
     // Route to appropriate message type based on event type
     // Charge-related events
@@ -136,7 +155,7 @@ function parseMessage(input: ParseInput): ParseOutput {
     ) {
         return fromJson(
             ChargeMessageSchema,
-            flattenChargeContent(content as Record<string, unknown>),
+            flattenChargeContent(content),
             jsonOptions,
         );
     }
@@ -159,7 +178,7 @@ function parseMessage(input: ParseInput): ParseOutput {
         );
     }
 
-    throw new Error(`Unsupported event type: ${message.eventType}`);
+    throw new Error(`Unsupported event type: ${envelope.eventType}`);
 }
 
 // `i` points at an opening '"'. Returns the index just past the closing '"'.
@@ -323,6 +342,13 @@ export default {
    * bytes it transmits (Go's encoder HTML-escapes `&` `<` `>` as `&` `<`
    * `>`); this slices that raw `content` substring out of the body verbatim and
    * HMACs it, rather than re-serializing the parsed object.
+   *
+   * Only `content` is covered by the signature. The envelope fields `id`, `event_type`
+   * and `created_at` are not authenticated: `event_type` only selects which message
+   * type the signed content is decoded as. Treat the returned message as authentic
+   * data about the customer or charge it names, but confirm any state transition the
+   * event type implies against the API (for example `payment.getCharge`) before
+   * acting on it, and do not rely on `id` or `created_at` alone for replay protection.
    *
    * @param rawBody the raw, unmodified webhook request body string
    * @throws {Error} If the signature is missing/invalid or the SDK is not initialized

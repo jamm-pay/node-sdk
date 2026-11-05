@@ -4,6 +4,7 @@ import { CreateCustomerRequestSchema, CustomerService, DeleteCustomerRequestSche
 import { CustomerSchema } from "../lib/proto/api/v1/common_pb";
 import type { BuyerJson, CustomerJson } from "../lib/proto/api/v1/common_pb";
 import transport from "../lib/transport";
+import { absentOnLookup } from "../lib/apierr";
 import { fromJson, toJson } from "@bufbuild/protobuf";
 import { DeepOmit, PlatformOptions } from "../types";
 
@@ -110,7 +111,7 @@ export default {
 
             return toJson(CustomerSchema, got.customer);
         } catch (error) {
-            if (error instanceof ConnectError && [Code.NotFound, Code.InvalidArgument, Code.PermissionDenied].includes(error.code)) {
+            if (absentOnLookup(error)) {
                 return null;
             }
             throw error;

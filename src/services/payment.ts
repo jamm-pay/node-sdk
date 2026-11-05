@@ -1,7 +1,8 @@
-import { createClient, ConnectError, Code, type Transport } from "@connectrpc/connect";
+import { createClient, type Transport } from "@connectrpc/connect";
 import { randomUUID } from "node:crypto";
 
 import transport from "../lib/transport";
+import { absentOnLookup } from "../lib/apierr";
 import { GetChargeRequestSchema, GetChargeResponseSchema, GetChargesRequestSchema, GetChargesResponseSchema, OffSessionPaymentAsyncRequestSchema, OffSessionPaymentAsyncResponseSchema, OffSessionPaymentRequestSchema, OffSessionPaymentResponseSchema, OnSessionPaymentRequestSchema, OnSessionPaymentResponseSchema, RefundRequestSchema, RefundResponseSchema, PaymentService } from "../lib/proto/api/v1/payment_pb";
 import type { OnSessionPaymentResponseJson, OffSessionPaymentAsyncRequestJson, OffSessionPaymentAsyncResponseJson, OffSessionPaymentResponseJson, GetChargeResponseJson, GetChargesResponseJson, OnSessionPaymentRequestJson, OffSessionPaymentRequestJson, GetChargesRequestJson, RefundRequestJson, RefundResponseJson } from "../lib/proto/api/v1/payment_pb";
 import { fromJson, toJson } from "@bufbuild/protobuf";
@@ -234,7 +235,7 @@ export default {
 
             return toJson(GetChargeResponseSchema, got);
         } catch (error) {
-            if (error instanceof ConnectError && [Code.NotFound, Code.InvalidArgument, Code.PermissionDenied].includes(error.code)) {
+            if (absentOnLookup(error)) {
                 return null;
             }
             throw error;

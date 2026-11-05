@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { API_VERSION } from "./apiversion";
 
 /**
  * SDK operation modes
@@ -19,23 +20,54 @@ const configSchema = z.object({
     clientSecret: z.string(),
     environment: availableEnvironments,
     mode: z.enum(['platform', 'merchant']),
+    apiVersion: z.string(),
 
     api: z.object({
-        url: z.string().url(),
+        url: z.url(),
     }),
 
     oauth2: z.object({
-        url: z.string().url(),
+        url: z.url(),
     }),
 });
 
 export type Config = z.infer<typeof configSchema>;
+
+const API_VERSION_REGEX = /^(\d{4})-(\d{2})-(\d{2})$/;
+
+// Round-tripping through Date.UTC rejects impossible dates like 2026-02-30, which it would roll over.
+function isCalendarDate(v: string): boolean {
+    const m = API_VERSION_REGEX.exec(v);
+    if (!m) {
+        return false;
+    }
+    const [y, mo, d] = [Number(m[1]), Number(m[2]), Number(m[3])];
+    const date = new Date(Date.UTC(y, mo - 1, d));
+    return date.getUTCFullYear() === y && date.getUTCMonth() === mo - 1 && date.getUTCDate() === d;
+}
+
+const apiVersionSchema = z.string().optional().superRefine((v, ctx) => {
+    if (!v) {
+        return;
+    }
+    if (!isCalendarDate(v)) {
+        ctx.addIssue({ code: "custom", message: `invalid apiVersion "${v}": expected YYYY-MM-DD` });
+        return;
+    }
+    if (v > API_VERSION) {
+        ctx.addIssue({
+            code: "custom",
+            message: `apiVersion ${v} is newer than this SDK supports (${API_VERSION}); upgrade the SDK to use it`,
+        });
+    }
+});
 
 const initInputSchema = z.object({
     clientId: z.string().trim().min(1),
     clientSecret: z.string().trim().min(1),
     environment: availableEnvironments,
     platform: z.boolean().optional().default(false),
+    apiVersion: apiVersionSchema,
 });
 
 export type InitInput = Omit<z.infer<typeof initInputSchema>, 'platform'> & {
@@ -68,6 +100,21 @@ export type InitInput = Omit<z.infer<typeof initInputSchema>, 'platform'> & {
  * })
  * ```
  *
+ * ## API version
+ *
+ * Requests carry `API_VERSION` by default. Set `apiVersion` (YYYY-MM-DD) to pin an
+ * older API version; a version newer than `API_VERSION` is rejected.
+ *
+ * @example
+ * ```
+ * jamm.config.init({
+ *   clientId: "your-client-id",
+ *   clientSecret: "your-client-secret",
+ *   environment: "prod",
+ *   apiVersion: "2026-08-26",
+ * })
+ * ```
+ *
  * @param input - The configuration object
  */
 function init(input: InitInput): void {
@@ -86,6 +133,7 @@ function init(input: InitInput): void {
         clientSecret: input.clientSecret,
         environment: input.environment,
         mode: mode,
+        apiVersion: input.apiVersion || API_VERSION,
         // Configure API base URL based on environment
         api: {
             url: input.environment === "prod"

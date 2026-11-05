@@ -22,6 +22,7 @@ export default {
 
 // Export Mode separately for easier access
 export { Mode };
+export { API_VERSION } from "./lib/apiversion";
 
 // Export shared types
 export type { PlatformOptions } from "./types";

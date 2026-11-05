@@ -1,10 +1,13 @@
-import type { Transport } from "@connectrpc/connect";
+import type { Interceptor, Transport } from "@connectrpc/connect";
 import { createConnectTransport } from "@connectrpc/connect-node";
 import config, { Mode } from "./config";
 import oauth2 from "./oauth2";
 import packageJson from "../../package.json";
 
 const HEADER_KEY_REGEX = /^[A-Za-z0-9_-]+$/;
+
+const API_VERSION_HEADER = "Jamm-API-Version";
+
 
 /**
  * Only allow alphanumeric, underscore and hyphen characters in the header key.
@@ -18,12 +21,50 @@ function getCustomHeaderKey(): string | null {
         return null;
     }
 
+    if (value.toLowerCase() === API_VERSION_HEADER.toLowerCase()) {
+        console.error(`JAMM_CUSTOM_HEADER_KEY cannot override ${API_VERSION_HEADER} and was ignored: "${value}"`);
+        return null;
+    }
+
     if (!HEADER_KEY_REGEX.test(value)) {
         console.error(`JAMM_CUSTOM_HEADER_KEY contains invalid characters and was ignored: "${value}"`);
         return null;
     }
 
     return value;
+}
+
+/**
+ * Sets the headers every API request carries. Exported so the headers can be
+ * asserted directly: connect-node speaks node:http, not fetch, so there is no
+ * fetch seam to spy on.
+ */
+export function authInterceptor(merchant?: string): Interceptor {
+    return (next) => async (req) => {
+        // Do not call this function outside of the interceptor scope,
+        // because it will nullify the refresh token logic.
+        const token = await oauth2.getAccessToken();
+
+        req.header.set("Authorization", `Bearer ${token}`);
+        req.header.set("Jamm-SDK-Version", `node:${packageJson.version}`);
+        req.header.set(API_VERSION_HEADER, config.get().apiVersion);
+
+        // Inject custom header when present.
+        const key = getCustomHeaderKey();
+        const val = process.env.JAMM_CUSTOM_HEADER_VALUE;
+
+        if (key && val) {
+            req.header.set(key, val);
+        }
+
+        // Platform feature: Set merchant ID to call Jamm API on behalf of a specific merchant
+        // This allows platform partners to make API calls scoped to individual merchants
+        if (merchant) {
+            req.header.set("Jamm-Merchant", merchant);
+        }
+
+        return next(req);
+    };
 }
 
 /**
@@ -62,35 +103,7 @@ export default function transport(merchant?: string): Transport {
             ignoreUnknownFields: true,
             useProtoFieldName: false,
         },
-        interceptors: [
-            (next) => async (req) => {
-                // Do not call this function outside of the interceptor scope,
-                // because it will nullify the refresh token logic.
-                const token = await oauth2.getAccessToken();
-
-                req.header.set("Authorization", `Bearer ${token}`);
-                req.header.set("X-SDK-Version", `node:${packageJson.version}`);
-
-                // Inject custom header when present.
-                const key = getCustomHeaderKey();
-                const val = process.env.JAMM_CUSTOM_HEADER_VALUE;
-
-                if (key && val) {
-                    req.header.set(key, val);
-                }
-
-                // Platform feature: Set merchant ID to call Jamm API on behalf of a specific merchant
-                // This allows platform partners to make API calls scoped to individual merchants
-                if (merchant) {
-                    req.header.set("Jamm-Merchant", merchant);
-                }
-
-                return next(req);
-            },
-        ],
-        nodeOptions: {
-            rejectUnauthorized: false,
-        },
+        interceptors: [authInterceptor(merchant)],
     });
 
     return transport;

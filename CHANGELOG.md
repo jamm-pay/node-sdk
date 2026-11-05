@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.0] - 2026-11-05
+
+### Removed
+
+- Node.js 20 is no longer supported (it reached end of life in April 2026). The SDK now requires Node.js 22 or later.
+
+### Changed
+
+- `zod` is upgraded from 3 to 4. Validation errors from `config.init` and the webhook `parse`/`verify` helpers are now zod 4 `ZodError`s: read `error.issues` instead of `error.errors`, and expect different default messages. An `instanceof ZodError` check against your own zod 3 copy no longer matches. TypeScript projects need TypeScript 5.5 or later to type-check against the SDK's types.
+
+### Security
+
+- API requests verify the server's TLS certificate again. All hosted environments serve publicly trusted certificates, so no change is needed on your side.
+- `webhook.parse` and `verifyAndParse` are stricter about the webhook envelope. They read only the known top-level fields and ignore everything else. A payload that sets the same field in both snake_case and camelCase (for example `event_type` and `eventType`) is now rejected, so if your code adds a camelCase copy next to the snake_case key, stop doing so. The `camelcase-keys` dependency is removed.
+- The webhook signature covers `content`. Before acting on an event, confirm the state it implies against the API (for example with `payment.getCharge`).
+- Dependency updates, including `zod`, to pick up upstream security fixes.
+
+## [0.13.0] - 2026-10-05
+
+### Added
+
+- Every request to the Jamm API (not OAuth token requests) sends a `Jamm-API-Version` header defaulting to the API version this SDK was built for (`API_VERSION`). To stay on an older version, set `apiVersion` in `config.init`; a newer one needs an SDK upgrade.
+- New error type `ERROR_TYPE_PAYMENT_CHARGE_OVER_DAILY_LIMIT`: the charge would exceed the daily limit of the buyer's bank account. Retry after midnight JST.
+
+### Changed
+
+- The SDK version header is renamed from `X-SDK-Version` to `Jamm-SDK-Version`. If a proxy or firewall allowlists outgoing headers, add `Jamm-SDK-Version`.
+- `payment.getCharge` and `customer.get` throw an "unsupported API version" error when the API rejects the pinned version, instead of returning `null`.
+
+### Deprecated
+
+- `ERROR_TYPE_CSV_DUPLICATE_USER` is no longer returned.
+
 ## [0.12.0] - 2026-08-25
 
 `0.10.1`, `0.10.2` and `0.11.0` were never published to npm, so upgrading from `0.10.0`
