@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.15.0] - 2026-11-19
+
+### Added
+
+- `refund.amountRefundedNetDiscounts` on refund webhooks — the amount returned to the buyer for this refund (`amountRefunded` minus its share of the charge discount). Sent on `REFUND_SUCCEEDED` only.
+
 ## [0.14.0] - 2026-11-05
 
 ### Removed
